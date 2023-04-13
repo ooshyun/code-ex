@@ -11,7 +11,7 @@ class QueueWithTwoStacks(object):
     def enqueue(self, val):
         self._stackNewestOnTop.append(val)
      
-    def peak(self):
+    def peek(self):
         if len(self._stackOldestOnTop) < 1:
             if len(self._stackNewestOnTop) > 0:
                 shiftStacktoStack(self._stackNewestOnTop, self._stackOldestOnTop)
@@ -37,7 +37,7 @@ def testQueueWithTwoStacks():
 
 
     for index in range(10):
-        print("Peak: ", testQueueWithTwoStacksobj.peak())
+        print("Peek: ", testQueueWithTwoStacksobj.peek())
         print("Pop: ", testQueueWithTwoStacksobj.dequeue())
 
     print("-------------")
@@ -47,7 +47,7 @@ def testQueueWithTwoStacks():
 
 
     for index in range(2):
-        print("Peak: ", testQueueWithTwoStacksobj.peak())
+        print("Peek: ", testQueueWithTwoStacksobj.peek())
         print("Pop: ", testQueueWithTwoStacksobj.dequeue())
 
 
@@ -56,6 +56,6 @@ def testQueueWithTwoStacks():
 
 
     for index in range(10):
-        print("Peak: ", testQueueWithTwoStacksobj.peak())
+        print("Peek: ", testQueueWithTwoStacksobj.peek())
         print("Pop: ", testQueueWithTwoStacksobj.dequeue())
 

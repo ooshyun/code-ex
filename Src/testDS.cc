@@ -10,8 +10,6 @@
 // #include <stdlib.h>
 // #include "sys/queue.h"
 
-const char* basket[] = {"{}", "()", "[]"};
-
 int testDataStructure() {
     printf("Hello Balanced Parentheses inExpression World!\n");
 

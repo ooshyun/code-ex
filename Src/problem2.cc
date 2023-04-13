@@ -13,7 +13,7 @@ public:
     queueWithTwoStack();
     ~queueWithTwoStack();
     void enqueue(int val);
-    int peak();       
+    int peek();       
     int dequeue();
     void shiftNewtoOld();
 };
@@ -38,7 +38,7 @@ void queueWithTwoStack::shiftNewtoOld(){
     }
 }
 
-int queueWithTwoStack::peak(){
+int queueWithTwoStack::peek(){
     if(stackOldestOnTop.empty()){
         if(stackNewestOnTop.empty()){
             return 0;
@@ -76,7 +76,7 @@ void testQueueWithTwoStack(){
     }
     
     for(index=0; index<int(sizeof(testArr)/sizeof(int)); index++){
-        std::cout << "Peak: "<< testQueueWithTwoStackObj.peak() << std::endl;
+        std::cout << "Peek: "<< testQueueWithTwoStackObj.peek() << std::endl;
         std::cout << "Pop: " << testQueueWithTwoStackObj.dequeue() << std::endl;
     }
     std::cout << "-----------"<< std::endl;
@@ -88,7 +88,7 @@ void testQueueWithTwoStack(){
     }
     
     for(index=0; index<3; index++){
-        std::cout << "Peak: "<< testQueueWithTwoStackObj.peak() << std::endl;
+        std::cout << "Peek: "<< testQueueWithTwoStackObj.peek() << std::endl;
         std::cout << "Pop: " << testQueueWithTwoStackObj.dequeue() << std::endl;
     }
 
@@ -97,7 +97,7 @@ void testQueueWithTwoStack(){
     }
 
     for(index=0; index<10; index++){
-        std::cout << "Peak: "<< testQueueWithTwoStackObj.peak() << std::endl;
+        std::cout << "Peek: "<< testQueueWithTwoStackObj.peek() << std::endl;
         std::cout << "Pop: " << testQueueWithTwoStackObj.dequeue() << std::endl;
     }
 }

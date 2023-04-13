@@ -5,6 +5,7 @@ enable_testing()
 
 set(HEADERS_SOURCE "${PROJECT_SOURCE_DIR}/Inc/problem1.h"
                    "${PROJECT_SOURCE_DIR}/Inc/problem2.h"
+                   "${PROJECT_SOURCE_DIR}/Inc/problem3.h"
 )
 
 # print headers
@@ -16,6 +17,7 @@ message("HEADERS_SOURCE: " ${HEADERS_SOURCE})
 set(SOURCES "${PROJECT_SOURCE_DIR}/Src/main.cc" 
             "${PROJECT_SOURCE_DIR}/Src/problem1.cc"
             "${PROJECT_SOURCE_DIR}/Src/problem2.cc"
+            "${PROJECT_SOURCE_DIR}/Src/problem3.cc"
             )
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
