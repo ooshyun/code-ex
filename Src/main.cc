@@ -1,7 +1,7 @@
 #include "stdio.h"
-#include "../Inc/problem1.h"
-#include "../Inc/problem2.h"
-#include "../Inc/problem3.h"
+#include "../Inc/ds_is_balence_parentheses.h"
+#include "../Inc/ds_queue_with_two_stack.h"
+#include "../Inc/ds_queue_and_stack.h"
 
 int main(void) {
     printf("Hello World!\n");

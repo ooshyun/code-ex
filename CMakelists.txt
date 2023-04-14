@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 3.0.0)
 project(practice VERSION 0.1.0)
 
 enable_testing()
-
-set(HEADERS_SOURCE "${PROJECT_SOURCE_DIR}/Inc/problem1.h"
-                   "${PROJECT_SOURCE_DIR}/Inc/problem2.h"
-                   "${PROJECT_SOURCE_DIR}/Inc/problem3.h"
+file(GLOB INC_FILES
+     "${PROJECT_SOURCE_DIR}/Inc/*.cc"
+)
+set(HEADERS_SOURCE ${INC_FILES}
 )
 
 # print headers
@@ -14,11 +14,10 @@ message("HEADERS_SOURCE: " ${HEADERS_SOURCE})
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -save-temps")
 
 # Aggregate the sources
-set(SOURCES "${PROJECT_SOURCE_DIR}/Src/main.cc" 
-            "${PROJECT_SOURCE_DIR}/Src/problem1.cc"
-            "${PROJECT_SOURCE_DIR}/Src/problem2.cc"
-            "${PROJECT_SOURCE_DIR}/Src/problem3.cc"
-            )
+file(GLOB SRC_FILES
+     "${PROJECT_SOURCE_DIR}/Src/*.cc"
+)
+set(SOURCES "${SRC_FILES}")
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 # set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/obj)

@@ -1,3 +1,3 @@
-#ifndef PROBLEM2_H
+#ifndef DS_QUEUE_WITH_TWO_STACK
 void testQueueWithTwoStack();
 #endif
