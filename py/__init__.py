@@ -1,2 +1,2 @@
-from .problem1 import testBalancedParenthesesinExpression
-from .problem2 import testQueueWithTwoStacks
+from .ds_is_balence_parentheses import testBalancedParenthesesinExpression
+from .ds_queue_with_two_stack import testQueueWithTwoStacks
