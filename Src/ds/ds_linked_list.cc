@@ -1,10 +1,25 @@
 #include <iostream>
 #include <stdint.h>
 
-struct Node{
+// struct Node{
+//     int data;
+//     struct Node *next;
+// };
+
+class Node{
+private:
+public:
     int data;
-    struct Node *next;
+    class Node *next;
+    Node(int data);
+    ~Node();
 };
+Node::Node(int data){
+    this->data=data;
+    this->next=nullptr;
+}
+Node::~Node(){
+}
 
 class LinkedList{
 private:
@@ -13,7 +28,6 @@ public:
     bool is_cycle();
     void append(int data);
     void prepend(int data);
-    void search(int data);
     void deleteWithValue(int data);
     void traversalOrder();
     LinkedList();
@@ -28,6 +42,7 @@ LinkedList::~LinkedList(){
         deleteWithValue(head->data);
     }
 }
+
 bool LinkedList::is_cycle(){
     // race with speed a, b, then if cycle then it will meet
     if (head == nullptr) return false;
@@ -43,11 +58,10 @@ bool LinkedList::is_cycle(){
     }
     return false;
 }
+
 void LinkedList::append(int data){
     // insertion data
-    Node *tail = new Node;
-    tail->data = data;
-    tail->next = nullptr;
+    Node *tail = new Node(data);
 
     // find a tail
     Node *node = head;
@@ -59,30 +73,27 @@ void LinkedList::append(int data){
         }
     }
 }
+
 void LinkedList::prepend(int data){
     // insert to head
-    Node *newHead= new Node;
-    newHead->data = data;
-    if(head == nullptr)
-        newHead->next = nullptr;
-    else
+    Node *newHead= new Node(data);
+    if(head != nullptr)
         newHead->next = head;
     head = newHead;
 }
 
 void LinkedList::deleteWithValue(int data){
     Node *bufNode = head;
-    Node *nextNode;
+    Node *nextNode = nullptr;
     bool ishead = true;
     while(bufNode->next!=nullptr){
         if(bufNode->data == data)
             break;
         else{
-            nextNode = bufNode->next;
-            if (nextNode->data == data)
+            if (bufNode->next->data == data)
                 break;
             else
-                bufNode = nextNode;
+                bufNode = bufNode->next;
         }
         ishead = false;
     }
@@ -99,7 +110,7 @@ void LinkedList::deleteWithValue(int data){
     }
     // middle
     else{
-        nextNode = nextNode->next;
+        nextNode = bufNode->next->next;
         delete bufNode->next;
         bufNode->next = nextNode;
     }

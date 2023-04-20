@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <iostream>
+
 struct Node{
     int data;
     struct Node *next;

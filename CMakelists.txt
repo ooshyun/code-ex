@@ -2,11 +2,12 @@ cmake_minimum_required(VERSION 3.0.0)
 project(practice VERSION 0.1.0)
 
 enable_testing()
-file(GLOB INC_FILES
-     "${PROJECT_SOURCE_DIR}/Inc/*.cc"
-)
-set(HEADERS_SOURCE ${INC_FILES}
-)
+
+# file(GLOB INC_FILES
+#      "${PROJECT_SOURCE_DIR}/Inc/*.h"
+# )
+# set(HEADERS_SOURCE ${INC_FILES}
+# )
 
 # print headers
 message("HEADERS_SOURCE: " ${HEADERS_SOURCE})
@@ -15,7 +16,8 @@ message("HEADERS_SOURCE: " ${HEADERS_SOURCE})
 
 # Aggregate the sources
 file(GLOB SRC_FILES
-     "${PROJECT_SOURCE_DIR}/Src/*.cc"
+     "${PROJECT_SOURCE_DIR}/Src/main.cc"
+     "${PROJECT_SOURCE_DIR}/Src/ds/*.cc"
 )
 set(SOURCES "${SRC_FILES}")
 
