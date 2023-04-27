@@ -12,12 +12,14 @@ int main(void) {
     printf("Hello World!\n");
     
     // 1. Practice Data Structures in HackerRank Youtube
-    testBalancedParenthesesinExpression();
-    testQueueWithTwoStack();
-    testQueue();
-    testStack();
-    testIsCycle();
-    testLinkedList();
-    
+    // testBalancedParenthesesinExpression();
+    // testQueueWithTwoStack();
+    // testQueue();
+    // testStack();
+    // testIsCycle();
+    // testLinkedList();
+    // testCheckBST();
+    testBinarySearchTree();
+
     return 0;
 }

@@ -1,29 +1,17 @@
 #include <iostream>
 #include <stdint.h>
+#include "../../Inc/data_structure.h"
 
-// struct Node{
-//     int data;
-//     struct Node *next;
-// };
-
-class Node{
-private:
-public:
-    int data;
-    class Node *next;
-    Node(int data);
-    ~Node();
-};
-Node::Node(int data){
+linkedlistNode::linkedlistNode(int data){
     this->data=data;
     this->next=nullptr;
 }
-Node::~Node(){
+linkedlistNode::~linkedlistNode(){
 }
 
 class LinkedList{
 private:
-    Node *head;
+    linkedlistNode *head;
 public:
     bool is_cycle();
     void append(int data);
@@ -47,8 +35,8 @@ bool LinkedList::is_cycle(){
     // race with speed a, b, then if cycle then it will meet
     if (head == nullptr) return false;
     if (head->next == nullptr) return false;
-    Node *fastNode = head->next;
-    Node *slowNode = head;
+    linkedlistNode *fastNode = head->next;
+    linkedlistNode *slowNode = head;
     
     while((fastNode!=nullptr) && (fastNode->next!=nullptr) && (slowNode!=nullptr)){
         if (fastNode == slowNode)
@@ -61,10 +49,10 @@ bool LinkedList::is_cycle(){
 
 void LinkedList::append(int data){
     // insertion data
-    Node *tail = new Node(data);
+    linkedlistNode *tail = new linkedlistNode(data);
 
     // find a tail
-    Node *node = head;
+    linkedlistNode *node = head;
     while(node->next!=nullptr){
         node = node->next;
         if(node->next == nullptr){
@@ -76,15 +64,15 @@ void LinkedList::append(int data){
 
 void LinkedList::prepend(int data){
     // insert to head
-    Node *newHead= new Node(data);
+    linkedlistNode *newHead= new linkedlistNode(data);
     if(head != nullptr)
         newHead->next = head;
     head = newHead;
 }
 
 void LinkedList::deleteWithValue(int data){
-    Node *bufNode = head;
-    Node *nextNode = nullptr;
+    linkedlistNode *bufNode = head;
+    linkedlistNode *nextNode = nullptr;
     bool ishead = true;
     while(bufNode->next!=nullptr){
         if(bufNode->data == data)
@@ -117,7 +105,7 @@ void LinkedList::deleteWithValue(int data){
 }
 
 void LinkedList::traversalOrder(){
-    Node *bufNode = head;
+    linkedlistNode *bufNode = head;
     while(bufNode!=nullptr){
         std::cout << bufNode->data << " ";
         bufNode = bufNode->next;

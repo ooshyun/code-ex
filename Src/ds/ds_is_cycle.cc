@@ -1,18 +1,18 @@
 #include <stdint.h>
 #include <iostream>
 
-struct Node{
+struct NodeTestCycle{
     int data;
-    struct Node *next;
+    struct NodeTestCycle* next;
 };
 
-bool is_cycle(Node* start){
+bool is_cycle(NodeTestCycle* start){
     // race with speed a, b, then if cycle then it will meet
     if (start == nullptr) return false;
     if (start->next == nullptr) return false;
 
-    Node *fastNode = start->next;
-    Node *slowNode = start;
+    NodeTestCycle* fastNode = start->next;
+    NodeTestCycle* slowNode = start;
 
     while((fastNode!=nullptr) && (fastNode->next!=nullptr) && (slowNode!=nullptr)){
         if (fastNode == slowNode){
@@ -27,29 +27,29 @@ bool is_cycle(Node* start){
 void testIsCycle(){
     int testArr[] = {1,2,3,4,5,6};
 
-    Node* head = new Node;
-    Node* cycleNode;
-    Node* bufNode;
+    NodeTestCycle* head = new NodeTestCycle;
+    NodeTestCycle* cycleNode;
+    NodeTestCycle* bufNode;
 
     head->data = testArr[0];
-    head->next = new Node;
+    head->next = new NodeTestCycle;
     
     bufNode = head->next;
     bufNode->data = testArr[1];
-    bufNode->next = new Node;
+    bufNode->next = new NodeTestCycle;
 
     bufNode = bufNode->next;
     bufNode->data = testArr[2];
-    bufNode->next = new Node;
+    bufNode->next = new NodeTestCycle;
 
     bufNode = bufNode->next;
     cycleNode = bufNode;
     bufNode->data = testArr[3];
-    bufNode->next = new Node;
+    bufNode->next = new NodeTestCycle;
     
     bufNode = bufNode->next;
     bufNode->data = testArr[4];
-    bufNode->next = new Node;
+    bufNode->next = new NodeTestCycle;
 
     bufNode = bufNode->next;
     bufNode->data = testArr[5];
@@ -61,7 +61,7 @@ void testIsCycle(){
     std::cout << "Is cycle? " << iscycle << std::endl;
 
     // delete
-    Node* delNode;
+    NodeTestCycle* delNode;
     bufNode = head;
     uint8_t index = 0;
     for(index=0; index<6; index++){
