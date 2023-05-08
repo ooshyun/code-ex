@@ -7,6 +7,7 @@
 */
 #include "stdio.h"
 #include "../Inc/data_structure.h"
+// #include "../Inc/ds_string_contacts.h"
 
 int main(void) {
     printf("Hello World!\n");
@@ -19,7 +20,8 @@ int main(void) {
     // testIsCycle();
     // testLinkedList();
     // testCheckBST();
-    testBinarySearchTree();
+    // testBinarySearchTree();
+    testContactString();
 
     return 0;
 }

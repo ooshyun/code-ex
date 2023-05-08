@@ -9,6 +9,7 @@ void testIsCycle();
 void testLinkedList();
 void testCheckBST();
 void testBinarySearchTree();
+void testContactString();
 
 // struct Node{
 //     int data;
