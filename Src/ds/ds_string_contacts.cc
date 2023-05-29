@@ -11,10 +11,6 @@ int getCharindex(char c){
     return buf-97;
 }
 
-void deleteContactStringNode(){
-
-}
-
 class ContactStringNode{
 private:
     class ContactStringNode* children[NUMBER_OF_CHARACTERS];

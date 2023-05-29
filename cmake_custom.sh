@@ -26,3 +26,5 @@ else
     echo "Built project"
 fi
 
+
+./build/bin/practice

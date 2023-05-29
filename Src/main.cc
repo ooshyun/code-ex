@@ -7,7 +7,25 @@
 */
 #include "stdio.h"
 #include "../Inc/data_structure.h"
-// #include "../Inc/ds_string_contacts.h"
+#include "../Inc/recursion.h"
+#include "../Inc/testclass.h"
+#include <iostream>
+
+#include <iostream>     // std::cout
+#include <algorithm>    // std::find
+#include <vector>       // std::vector
+
+
+class TestClass{
+private:
+public:
+    int32_t x;
+    TestClass(){
+        x=10;
+    };
+    ~TestClass(){};
+};
+
 
 int main(void) {
     printf("Hello World!\n");
@@ -21,7 +39,23 @@ int main(void) {
     // testLinkedList();
     // testCheckBST();
     // testBinarySearchTree();
-    testContactString();
+    // testContactString();
 
+    // 2. Practice Recursion in HackerRank Youtube
+    testGraph();
+    // testBFS();
+    // testDFS();
+
+
+    // X. Text case
+    
+    // TestClass* t = new TestClass;
+    // TestClass t2;
+    // int64_t *addr;
+    // addr = (int64_t *)t;
+    // addr = (int64_t *)(&t2);
+    // std::cout<< ((TestClass*)addr)->x<<std::endl;
+    // testmem();
+    
     return 0;
 }

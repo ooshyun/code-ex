@@ -1,5 +1,5 @@
-#ifndef DATA_STRUCTURE
-#define DATA_STRUCTURE
+#ifndef DATA_STRUCTURE_H
+#define DATA_STRUCTURE_H
 
 void testBalancedParenthesesinExpression();
 void testQueueWithTwoStack();
@@ -11,10 +11,6 @@ void testCheckBST();
 void testBinarySearchTree();
 void testContactString();
 
-// struct Node{
-//     int data;
-//     struct Node *next;
-// };
 
 class linkedlistNode{
 private:
