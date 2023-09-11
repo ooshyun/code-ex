@@ -1,58 +1,23 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(practice VERSION 0.1.0)
+project(cppexample VERSION 0.1.0)
 
 enable_testing()
 
 set(CMAKE_OSX_ARCHITECTURES arm64)
 
-# Set Compiler
-# set(CMAKE_CXX_COMPILER "/usr/bin/clang")
-
-# Set C++ standard to C++20
-set(CMAKE_CXX_STANDARD 20)
+## TODO: Anlayze the following code
+# # specify the C++ standard
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_EXTENSIONS OFF)
+# set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_C_COMPILER_FORCED TRUE)
 
-# print headers
-message("HEADERS_SOURCE: " ${HEADERS_SOURCE})
-
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -save-temps")
-
-# Aggregate the sources
-file(GLOB SRC_FILES
-     "${PROJECT_SOURCE_DIR}/Src/main.cc"
-     "${PROJECT_SOURCE_DIR}/Src/testDS.cc"
-     "${PROJECT_SOURCE_DIR}/Src/ds/*.cc"
-     "${PROJECT_SOURCE_DIR}/Src/recursion/*.cc"
-     "${PROJECT_SOURCE_DIR}/Src/test/*.cc"
-)
-set(SOURCES "${SRC_FILES}")
+# # define target paths
+# set(TARGET_ROOT_DIR ${PROJECT_SOURCE_DIR}/sdk_build/${CMAKE_BUILD_TYPE})
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-# set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/obj)
 
-# print sources
-message("--SOURCES--")
-message(${SOURCES})
-message("-----------")
+# # add coding-test
+add_subdirectory(examples/cpp)
 
-
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
-include_directories(
-  include
-  ${HEADERS_SOURCE}
-)
-
-add_executable(${PROJECT_NAME} ${SOURCES})
-
-target_compile_options(${PROJECT_NAME} PRIVATE
-  -Wall                # enable all warnings
-  # -Wextra              # enable extra warnings
-  # -pedantic            # enforce strict ANSI/ISO compliance
-  # -O2                  # enable optimization
-  # -g                   # enable debugging symbols
-  # -c                   # generate object files only
-  # -S                   # generate assembly language output
-  # -save-temps
-  # -masm=intel          # use Intel syntax for assembly output
-)

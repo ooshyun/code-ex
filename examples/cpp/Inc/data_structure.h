@@ -10,7 +10,7 @@ void testLinkedList();
 void testCheckBST();
 void testBinarySearchTree();
 void testContactString();
-
+void testMinHeap();
 
 class linkedlistNode{
 private:
@@ -36,4 +36,5 @@ public:
     void getchild(treeNode* leftNode, treeNode* rightNode);
 };
 
+void testGraph();
 #endif

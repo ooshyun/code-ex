@@ -44,6 +44,7 @@ private:
             bufnode = &hashmap[*bufadj];
 
             auto is_find = std::find(visited.begin(), visited.end(), bufnode->id);
+
             if(is_find != visited.end()) 
             {
                 bufadj++;

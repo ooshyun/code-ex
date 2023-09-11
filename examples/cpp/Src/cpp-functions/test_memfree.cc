@@ -1,6 +1,6 @@
 #include<iostream>
 
-void testmem(){
+void testMemAllocate(){
     int* p = new int[10];
     int* p_other = p;
     
