@@ -111,6 +111,10 @@ void my_swap(T &a, T &b) {
   a = std::move(b);
   b = std::move(tmp);
 }
+
+int& func1(int& a) { return a; }
+int func2(int b) { return b; }
+
 void test_rvalue(void) {
   MyString s("abc");
   std::vector<MyString> vec;
@@ -122,12 +126,6 @@ void test_rvalue(void) {
   vec.push_back(s);
   std::cout << "세 번째 추가 ---" << std::endl;
   vec.push_back(s);
-}
-
-int& func1(int& a) { return a; }
-int func2(int b) { return b; }
-
-// int main() {
 
   // int a = 3;
   // func1(a) = 4;
@@ -152,4 +150,5 @@ int func2(int b) { return b; }
   // str1.println();
   // std::cout << "str2 : ";
   // str2.println();
-// }
+
+}

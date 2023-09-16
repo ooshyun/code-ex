@@ -5,6 +5,8 @@ enable_testing()
 
 set(CMAKE_OSX_ARCHITECTURES arm64)
 
+# set(CMAKE_CXX_COMPILER /opt/homebrew/opt/llvm/bin/clang++)
+
 ## TODO: Anlayze the following code
 # # specify the C++ standard
 set(CMAKE_CXX_STANDARD 14)

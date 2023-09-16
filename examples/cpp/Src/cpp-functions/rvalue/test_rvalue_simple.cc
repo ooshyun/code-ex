@@ -64,19 +64,22 @@ void test_rvalue_simple(void) {
 
   //////////////////
 
-  // A_perfect_forward a_pf;
-  // const A_perfect_forward ca_pf;
+  A_perfect_forward a_pf;
+  const A_perfect_forward ca_pf;
 
-  // std::cout << "원본 --------" << std::endl;
-  // g_perfect_forward(a_pf);
-  // g_perfect_forward(ca_pf);
-  // g_perfect_forward(A_perfect_forward());
+  std::cout << "원본 --------" << std::endl;
+  g_perfect_forward(a_pf);
+  g_perfect_forward(ca_pf);
+  g_perfect_forward(A_perfect_forward());
 
-  // std::cout << "Wrapper -----" << std::endl;
-  // wrapper(a_pf);
-  // wrapper(ca_pf);
-  // wrapper(A_perfect_forward());
+  std::cout << "Wrapper -----" << std::endl;
+  wrapper(a_pf);
+  wrapper(ca_pf);
+  wrapper(A_perfect_forward());
 
+  int && rxval = 10;
+  std::cout << "rxval: " << rxval << std::endl;
+  
   /*
     typedef int& T;
     T& r1;   // int& &; r1 은 int&

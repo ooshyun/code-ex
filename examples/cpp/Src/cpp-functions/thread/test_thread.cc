@@ -1,3 +1,5 @@
+// https://modoocode.com/269
+
 #include <iostream>
 #include <thread>
 using std::thread;

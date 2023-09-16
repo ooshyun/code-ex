@@ -1,3 +1,5 @@
+// https://modoocode.com/271
+
 #include <atomic>
 #include <iostream>
 #include <thread>
@@ -17,8 +19,10 @@ std::atomic<bool> y_seq_cst(false);
 std::atomic<int> z_seq_cst(0);
 
 void worker(std::atomic<int>& counter) {
+// void worker(int* counter) {
   for (int i = 0; i < 10000; i++) {
     counter++;
+    // (*counter)++;
   }
 }
 
@@ -26,10 +30,12 @@ void worker(std::atomic<int>& counter) {
 void test_atomic(void) {
     printf("  test_atomic\n");
     std::atomic<int> counter(0);
+    // int counter = 0;
 
     std::vector<std::thread> workers;
     for (int i = 0; i < 4; i++) {
         workers.push_back(std::thread(worker, ref(counter)));
+        // workers.push_back(std::thread(worker, &counter));
     }
 
     for (int i = 0; i < 4; i++) {
@@ -84,7 +90,9 @@ void test_atomic_memory_order_relaxed(void) {
   std::atomic<int> counter(0);
 
   for (int i = 0; i < 4; i++) {
-    threads.push_back(std::thread(worker_atomic_memory_order_relaxed, &counter));
+    threads.push_back(std::thread(
+      worker_atomic_memory_order_relaxed, \
+      &counter));
   }
 
   for (int i = 0; i < 4; i++) {
@@ -107,16 +115,21 @@ void producer(std::atomic<bool>* is_ready, int* data) {
 void consumer(std::atomic<bool>* is_ready, int* data) {
     // data 가 준비될 때 까지 기다린다.
 
-    while (!is_ready->load(std::memory_order_acquire)){
+    while (!is_ready->load(std::memory_order_acquire)) {
     }
 
     std::cout << "Data : " << *data << std::endl;
 
     while (!is_ready_global.load(std::memory_order_acquire)) {
     }
-    std::cout << "data[0] : " << data_arr[0].load(memory_order_relaxed) << std::endl;
-    std::cout << "data[1] : " << data_arr[1].load(memory_order_relaxed) << std::endl;
-    std::cout << "data[2] : " << data_arr[2].load(memory_order_relaxed) << std::endl;
+    std::cout << "data[0] : " \
+      << data_arr[0].load(memory_order_relaxed) << std::endl;
+    std::cout << "data[1] : " \
+      << data_arr[1].load(memory_order_relaxed) << std::endl;
+    std::cout << "data[2] : " \
+      << data_arr[2].load(memory_order_relaxed) << std::endl;
+
+    std::atomic_thread_fence(std::memory_order_acquire);
 
 }
 
@@ -181,7 +194,7 @@ void read_x_then_y_seq_cst() {
   }
 }
 
-void read_y_then_x_seq_cst(){
+void read_y_then_x_seq_cst() {
   while (!y_seq_cst.load(std::memory_order_acquire)) {
   }
   if (x_seq_cst.load(std::memory_order_acquire)) {

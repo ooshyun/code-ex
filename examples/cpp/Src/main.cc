@@ -42,7 +42,8 @@ int main(void) {
     // testCheckBST();
     // testBinarySearchTree();
     // testContactString();
-    testMinHeap();
+    // testMinHeap();
+
     // 2. Practice Recursion in HackerRank Youtube
     // testGraph();
     // testBFS();
@@ -56,7 +57,7 @@ int main(void) {
     // testDateTime();
     // testMemAllocate();
     // testRand();
-    // test_vector_reference();
+    // test_vector();
     // test_typedef();
     // test_end_func_const();
     // test_ref();
@@ -73,7 +74,7 @@ int main(void) {
     // test_promise_future_scratch();
     // test_promise_future();
     // test_wait_for();
-    // test_shared_future();
+    test_shared_future();
     // test_packaged_task();
     // test_async();
     // test_sync_vs_async_sync();
@@ -81,7 +82,7 @@ int main(void) {
     // test_thread_pool();
     // test_copy_elision();
     // test_rvalue_simple();
-    test_rvalue();
+    // test_rvalue();
     // test_type_cast();
     // test_template();
 #endif

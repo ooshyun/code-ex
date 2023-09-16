@@ -1,3 +1,5 @@
+// https://modoocode.com/285
+
 #include <chrono>
 #include <condition_variable>
 #include <cstdio>

@@ -8,7 +8,7 @@ void testDataStructure(void);
 void testDateTime(void);
 void testMemAllocate(void);
 void testRand(void);
-void test_vector_reference(void);
+void test_vector(void);
 void test_typedef(void);
 void test_end_func_const(void);
 void test_ref(void);
