@@ -10,6 +10,7 @@ file(GLOB SRC_FILES
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/cpp-functions/*.c"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/cpp-functions/thread/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/cpp-functions/rvalue/*.cc"
+     "${CMAKE_CURRENT_SOURCE_DIR}/Src/cpp-functions/function/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/design-pattern/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/design-pattern/*.c"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/utils/*.cc"
@@ -23,13 +24,59 @@ message("--SOURCES--")
 message(${SOURCES})
 message("-----------")
 
+
+# installation: brew
+find_package(boost)
+if(NOT boost_FOUND)
+  message("boost not found")
+  set(libboost 
+    /opt/homebrew/Cellar/boost/1.82.0_1/lib/libboost_filesystem.a
+    /opt/homebrew/Cellar/boost/1.82.0_1/lib/libboost_system-mt.a
+    /opt/homebrew/Cellar/boost/1.82.0_1/lib/libboost_thread-mt.a
+    /opt/homebrew/Cellar/boost/1.82.0_1/lib/libboost_chrono.a
+    /opt/homebrew/Cellar/boost/1.82.0_1/lib/libboost_atomic-mt.a
+  )
+endif()
+
+find_package(curl)
+if(NOT curl_FOUND)
+  message("curl not found")
+  set(libcurl /opt/homebrew/Cellar/curl/8.3.0/lib/libcurl.a)
+endif()
+
+# set(libspdlog /opt/homebrew/Cellar/spdlog/1.12.0/lib/libspdlog.a)
+set(libspdlog /opt/homebrew/Cellar/spdlog/1.12.0/lib/libspdlog.1.12.0.dylib)
+
+find_package(openssl)
+if(NOT openssl_FOUND)
+  message("openssl not found")
+  set(libcrypto /opt/homebrew/Cellar/openssl@1.1/1.1.1v/lib/libcrypto.a)
+  set(libssl /opt/homebrew/Cellar/openssl@1.1/1.1.1v/lib/libssl.a)
+endif()
+
+
+set (libfmt /opt/homebrew/Cellar/fmt/10.1.1/lib/libfmt.a)
+
 add_library(ccex ${SOURCES})
-# add_dependencies(example-cc spdlog)
 
 target_include_directories(ccex
 PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/Inc
-  # ${PROJECT_SOURCE_DIR}/cpp/third_party/spdlog/include
+  /opt/homebrew/Cellar/boost/1.82.0_1/include
+  /opt/homebrew/Cellar/nlohmann-json/3.11.2/include
+  /opt/homebrew/Cellar/spdlog/1.12.0/include
+  /opt/homebrew/Cellar/curl/8.3.0/include
+  /opt/homebrew/Cellar/fmt/10.1.1/include # dependency of spdlog
+)
+
+target_link_libraries(ccex
+PUBLIC
+  ${libboost}
+  ${libcurl}
+  ${libspdlog}
+  ${libcrypto}
+  ${libssl}
+  ${libfmt}
 )
 
 add_executable(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/Src/main.cc")
@@ -49,16 +96,10 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 target_include_directories(${PROJECT_NAME}
 PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/Inc
-  # ${PROJECT_SOURCE_DIR}/cpp/third_party/spdlog/include
 )
 
-target_link_libraries(${PROJECT_NAME} ccex)
+target_link_libraries(${PROJECT_NAME} PUBLIC ccex)
 
-# # Include code-coverage settings:
-# target_link_libraries(${PROJECT_NAME} 
-# PUBLIC
-#   spdlog
-# )
 
 # install(TARGETS ${PROJECT_NAME} DESTINATION /usr/local/lib)
 # install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/sense DESTINATION /usr/local/include)

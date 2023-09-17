@@ -17,20 +17,23 @@
 
 #include <iostream>  // std::cout
 
+#include "../Inc/log.hpp"
+
 #ifdef TEST_ALGORITHM_EXAM
-#include "../Inc/data_structure.h"
+#include "../Inc/data_structure.hpp"
 #endif 
 
 #ifdef TEST_CPP_FUNCTION
-#include "../Inc/test_cpp_function.h"
+#include "../Inc/test_cpp_function.hpp"
 #endif
 
 #ifdef TEST_DESIGN_PATTERN
-#include "../Inc/design_pattern.h"
+#include "../Inc/design_pattern.hpp"
 #endif
 
 int main(void) {
-    printf("Hello World!\n");
+    practice::log_init(0);
+    LOG_DEBUG("Start main function");
 #ifdef TEST_ALGORITHM_EXAM
     // 1. Practice Data Structures in HackerRank Youtube
     // testBalancedParenthesesinExpression();
@@ -74,7 +77,7 @@ int main(void) {
     // test_promise_future_scratch();
     // test_promise_future();
     // test_wait_for();
-    test_shared_future();
+    // test_shared_future();
     // test_packaged_task();
     // test_async();
     // test_sync_vs_async_sync();
@@ -85,6 +88,27 @@ int main(void) {
     // test_rvalue();
     // test_type_cast();
     // test_template();
+
+    /* function/test_labmda.cc */
+    // test_functor();
+    // test_functor_lambda();
+    // test_basic_lambda();
+    // test_capture_lambda();
+    // test_mutable_lambda();
+    // test_range_capture();
+    // test_constructor_lambda();
+    // test_transfer_lambda();
+
+    /* function/test_function.cc */
+    // test_callable();
+    test_std_func();
+    test_member_class_function();
+    test_memfn();
+    // test_bind();
+    
+    /* function/test_function_pointer.cc */
+    // test_func_ptr();    
+    // test_share_ptr_lambda();
 #endif
 
 #ifdef TEST_DESIGN_PATTERN

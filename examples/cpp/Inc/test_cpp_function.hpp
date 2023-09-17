@@ -35,4 +35,27 @@ void test_rvalue(void);
 void test_rvalue_simple(void);
 void test_type_cast(void);
 void test_template();
+
+// function/test_function.cc
+void test_callable(void);
+void test_std_func(void);
+void test_member_class_function(void);
+void test_memfn(void);
+void test_bind(void);
+
+
+// function/test_labmda.cc
+void test_functor(void);
+void test_functor_lambda(void);
+void test_basic_lambda(void);
+void test_capture_lambda(void);
+void test_mutable_lambda(void);
+void test_range_capture(void);
+void test_constructor_lambda(void);
+void test_transfer_lambda(void);
+
+// function/test_function_pointer.cc
+void test_func_ptr(void);
+void test_share_ptr_lambda(void);
+
 #endif

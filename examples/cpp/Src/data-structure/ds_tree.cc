@@ -1,5 +1,5 @@
 #include "iostream"
-#include "../../Inc/data_structure.h"
+#include "../../Inc/data_structure.hpp"
 
 void preorder(treeNode *root, treeNode *node=nullptr){
     if(root!=nullptr){

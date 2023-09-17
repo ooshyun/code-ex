@@ -6,13 +6,17 @@ enable_testing()
 set(CMAKE_OSX_ARCHITECTURES arm64)
 
 # set(CMAKE_CXX_COMPILER /opt/homebrew/opt/llvm/bin/clang++)
+# set(CMAKE_CXX_COMPILER /usr/bin/clang++)
+
+message(STATUS "CMAKE_OSX_ARCHITECTURES: ${CMAKE_OSX_ARCHITECTURES}")
+message(STATUS "CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
 
 ## TODO: Anlayze the following code
 # # specify the C++ standard
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # set(CMAKE_CXX_EXTENSIONS OFF)
-# set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_C_COMPILER_FORCED TRUE)
 
 # # define target paths

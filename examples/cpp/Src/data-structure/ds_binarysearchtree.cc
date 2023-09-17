@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../Inc/data_structure.h"
+#include "../../Inc/data_structure.hpp"
 
 void treeNode::getchild(treeNode* leftNode, treeNode* rightNode){
     left = leftNode;

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdint.h>
-#include "../../Inc/data_structure.h"
+#include "../../Inc/data_structure.hpp"
 
 linkedlistNode::linkedlistNode(int data){
     this->data=data;

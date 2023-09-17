@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <iostream>
-#include "../Inc/design_pattern.h"
+#include "../Inc/design_pattern.hpp"
 
 namespace factorial{
 class Core{
