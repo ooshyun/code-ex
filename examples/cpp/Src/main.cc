@@ -15,6 +15,9 @@
 // Practice Design Pattern
 // #define TEST_DESIGN_PATTERN
 
+// Practice Third Party Library
+#define TEST_LIBRARY
+
 #include <iostream>  // std::cout
 
 #include "../Inc/log.hpp"
@@ -29,6 +32,10 @@
 
 #ifdef TEST_DESIGN_PATTERN
 #include "../Inc/design_pattern.hpp"
+#endif
+
+#ifdef TEST_LIBRARY
+#include "../Inc/std.hpp"
 #endif
 
 int main(void) {
@@ -54,6 +61,7 @@ int main(void) {
 #endif
 
 #ifdef TEST_CPP_FUNCTION
+    // test_smart_pointer();
     // testClassAddress();
     // testChrono();
     // testDataStructure();
@@ -101,9 +109,9 @@ int main(void) {
 
     /* function/test_function.cc */
     // test_callable();
-    test_std_func();
-    test_member_class_function();
-    test_memfn();
+    // test_std_func();
+    // test_member_class_function();
+    // test_memfn();
     // test_bind();
     
     /* function/test_function_pointer.cc */
@@ -128,6 +136,10 @@ int main(void) {
     // printf(result ? "true\n" : "false\n");
 #endif
 
+
+#ifdef TEST_LIBRARY
+    test_chronos_time();
+#endif
 
     return 0;
 }

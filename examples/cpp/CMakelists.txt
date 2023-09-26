@@ -1,7 +1,6 @@
 # # add third party, spdlog
 # include(${CMAKE_SOURCE_DIR}/third_party/spdlog.cmake)
 
-
 # Aggregate the sources
 file(GLOB SRC_FILES
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/data-structure/*.cc"
@@ -14,6 +13,9 @@ file(GLOB SRC_FILES
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/design-pattern/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/design-pattern/*.c"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/utils/*.cc"
+     "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/*.cc"
+     "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/curl/*.cc"
+     "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/std/chronos/*.cc"
      )
 set(SOURCES "${SRC_FILES}")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
@@ -24,50 +26,68 @@ message("--SOURCES--")
 message(${SOURCES})
 message("-----------")
 
+# set(ROOT_LIB "/opt/homebrew/Cellar/")
+set(ROOT_LIB "/usr/local/opt/")
 
 # installation: brew
 find_package(boost)
 if(NOT boost_FOUND)
   message("boost not found")
   set(libboost 
-    /opt/homebrew/Cellar/boost/1.82.0_1/lib/libboost_filesystem.a
-    /opt/homebrew/Cellar/boost/1.82.0_1/lib/libboost_system-mt.a
-    /opt/homebrew/Cellar/boost/1.82.0_1/lib/libboost_thread-mt.a
-    /opt/homebrew/Cellar/boost/1.82.0_1/lib/libboost_chrono.a
-    /opt/homebrew/Cellar/boost/1.82.0_1/lib/libboost_atomic-mt.a
-  )
+    # ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_filesystem.a
+    # ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_system-mt.a
+    # ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_thread-mt.a
+    # ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_chrono.a
+    # ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_atomic-mt.a
+    ${ROOT_LIB}/boost/lib/libboost_filesystem.a
+    ${ROOT_LIB}/boost/lib/libboost_system-mt.a
+    ${ROOT_LIB}/boost/lib/libboost_thread-mt.a
+    ${ROOT_LIB}/boost/lib/libboost_chrono.a
+    ${ROOT_LIB}/boost/lib/libboost_atomic-mt.a
+    )
 endif()
 
 find_package(curl)
 if(NOT curl_FOUND)
   message("curl not found")
-  set(libcurl /opt/homebrew/Cellar/curl/8.3.0/lib/libcurl.a)
+  # set(libcurl ${ROOT_LIB}/curl/8.3.0/lib/libcurl.a)
+  set(libcurl ${ROOT_LIB}/curl/lib/libcurl.a)
 endif()
 
-# set(libspdlog /opt/homebrew/Cellar/spdlog/1.12.0/lib/libspdlog.a)
-set(libspdlog /opt/homebrew/Cellar/spdlog/1.12.0/lib/libspdlog.1.12.0.dylib)
+# set(libspdlog ${ROOT_LIB}/spdlog/1.12.0/lib/libspdlog.a)
+# set(libspdlog ${ROOT_LIB}/spdlog/lib/libspdlog.a)
+
+# set(libspdlog ${ROOT_LIB}/spdlog/1.12.0/lib/libspdlog.1.12.0.dylib)
+set(libspdlog ${ROOT_LIB}/spdlog/lib/libspdlog.1.12.0.dylib)
 
 find_package(openssl)
 if(NOT openssl_FOUND)
   message("openssl not found")
-  set(libcrypto /opt/homebrew/Cellar/openssl@1.1/1.1.1v/lib/libcrypto.a)
-  set(libssl /opt/homebrew/Cellar/openssl@1.1/1.1.1v/lib/libssl.a)
+  # set(libcrypto ${ROOT_LIB}/openssl@1.1/1.1.1v/lib/libcrypto.a)
+  # set(libssl ${ROOT_LIB}/openssl@1.1/1.1.1v/lib/libssl.a)
+  set(libcrypto ${ROOT_LIB}/openssl@1.1/lib/libcrypto.a)
+  set(libssl ${ROOT_LIB}/openssl@1.1/lib/libssl.a)
 endif()
 
 
-set (libfmt /opt/homebrew/Cellar/fmt/10.1.1/lib/libfmt.a)
+# set (libfmt ${ROOT_LIB}/fmt/10.1.1/lib/libfmt.a)
+set (libfmt ${ROOT_LIB}/fmt/lib/libfmt.a)
 
 add_library(ccex ${SOURCES})
-
 target_include_directories(ccex
 PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/Inc
-  /opt/homebrew/Cellar/boost/1.82.0_1/include
-  /opt/homebrew/Cellar/nlohmann-json/3.11.2/include
-  /opt/homebrew/Cellar/spdlog/1.12.0/include
-  /opt/homebrew/Cellar/curl/8.3.0/include
-  /opt/homebrew/Cellar/fmt/10.1.1/include # dependency of spdlog
-)
+  # ${ROOT_LIB}/boost/1.82.0_1/include
+  # ${ROOT_LIB}/nlohmann-json/3.11.2/include
+  # ${ROOT_LIB}/spdlog/1.12.0/include
+  # ${ROOT_LIB}/curl/8.3.0/include
+  # ${ROOT_LIB}/fmt/10.1.1/include # dependency of spdlog
+  ${ROOT_LIB}/boost/include
+  ${ROOT_LIB}/nlohmann-json/include
+  ${ROOT_LIB}/spdlog/include
+  ${ROOT_LIB}/curl/include
+  ${ROOT_LIB}/fmt/include # dependency of spdlog
+  )
 
 target_link_libraries(ccex
 PUBLIC

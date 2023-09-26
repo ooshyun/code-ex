@@ -1,7 +1,7 @@
 #ifndef TESTCLASS_H
 #define TESTCLASS_H
 
-void testSmartPointer(void);
+void test_smart_pointer(void);
 void testClassAddress(void);
 void testChrono(void);
 void testDataStructure(void);
