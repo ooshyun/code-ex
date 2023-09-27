@@ -58,4 +58,14 @@ void test_transfer_lambda(void);
 void test_func_ptr(void);
 void test_share_ptr_lambda(void);
 
+
+// test_uniform_init.cc
+void test_uniform_init(void);
+
+// test_constexp.cc
+void test_constexp(void);
+
+
+// test_struct.cc
+void test_struct_inheritance(void);
 #endif

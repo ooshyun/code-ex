@@ -14,6 +14,7 @@ file(GLOB SRC_FILES
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/design-pattern/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/design-pattern/*.c"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/utils/*.cc"
+     "${CMAKE_CURRENT_SOURCE_DIR}/Src/boost/property_tree/*.cc"
      )
 set(SOURCES "${SRC_FILES}")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)

@@ -1,4 +1,4 @@
-#ifndef DATA_STRUCTURE_H
+#ifndef DATA_STRUCTURE_H  // or #pragma once
 #define DATA_STRUCTURE_H
 
 void testBalancedParenthesesinExpression();
