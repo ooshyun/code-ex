@@ -27,68 +27,97 @@ message("--SOURCES--")
 message(${SOURCES})
 message("-----------")
 
-# set(ROOT_LIB "/opt/homebrew/Cellar/")
-set(ROOT_LIB "/usr/local/opt/")
+if (CMAKE_OSX_ARCHITECTURES MATCHES "arm64")
+  set(ROOT_LIB "/opt/homebrew/Cellar/")
+else()
+  set(ROOT_LIB "/usr/local/opt/")
+  set(x86_64_LIB ON)
+endif()
+
+message("ROOT_LIB ${ROOT_LIB}")
 
 # installation: brew
 find_package(boost)
 if(NOT boost_FOUND)
   message("boost not found")
-  set(libboost 
-    # ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_filesystem.a
-    # ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_system-mt.a
-    # ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_thread-mt.a
-    # ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_chrono.a
-    # ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_atomic-mt.a
-    ${ROOT_LIB}/boost/lib/libboost_filesystem.a
-    ${ROOT_LIB}/boost/lib/libboost_system-mt.a
-    ${ROOT_LIB}/boost/lib/libboost_thread-mt.a
-    ${ROOT_LIB}/boost/lib/libboost_chrono.a
-    ${ROOT_LIB}/boost/lib/libboost_atomic-mt.a
+  if (x86_64_LIB)
+    set(libboost
+      ${ROOT_LIB}/boost/lib/libboost_filesystem.a
+      ${ROOT_LIB}/boost/lib/libboost_system-mt.a
+      ${ROOT_LIB}/boost/lib/libboost_thread-mt.a
+      ${ROOT_LIB}/boost/lib/libboost_chrono.a
+      ${ROOT_LIB}/boost/lib/libboost_atomic-mt.a
+      )
+  else()
+    set(libboost 
+      ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_filesystem.a
+      ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_system-mt.a
+      ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_thread-mt.a
+      ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_chrono.a
+      ${ROOT_LIB}/boost/1.82.0_1/lib/libboost_atomic-mt.a
     )
+  endif()
 endif()
 
 find_package(curl)
 if(NOT curl_FOUND)
   message("curl not found")
-  # set(libcurl ${ROOT_LIB}/curl/8.3.0/lib/libcurl.a)
-  set(libcurl ${ROOT_LIB}/curl/lib/libcurl.a)
+  if (x86_64_LIB)
+    set(libcurl ${ROOT_LIB}/curl/lib/libcurl.a)
+  else()
+    set(libcurl ${ROOT_LIB}/curl/8.3.0/lib/libcurl.a)
+  endif()
 endif()
 
 # set(libspdlog ${ROOT_LIB}/spdlog/1.12.0/lib/libspdlog.a)
 # set(libspdlog ${ROOT_LIB}/spdlog/lib/libspdlog.a)
-
-# set(libspdlog ${ROOT_LIB}/spdlog/1.12.0/lib/libspdlog.1.12.0.dylib)
-set(libspdlog ${ROOT_LIB}/spdlog/lib/libspdlog.1.12.0.dylib)
+if (x86_64_LIB)
+  set(libspdlog ${ROOT_LIB}/spdlog/lib/libspdlog.1.12.0.dylib)
+else()
+  set(libspdlog ${ROOT_LIB}/spdlog/1.12.0/lib/libspdlog.1.12.0.dylib)
+endif()
 
 find_package(openssl)
 if(NOT openssl_FOUND)
   message("openssl not found")
-  # set(libcrypto ${ROOT_LIB}/openssl@1.1/1.1.1v/lib/libcrypto.a)
-  # set(libssl ${ROOT_LIB}/openssl@1.1/1.1.1v/lib/libssl.a)
-  set(libcrypto ${ROOT_LIB}/openssl@1.1/lib/libcrypto.a)
-  set(libssl ${ROOT_LIB}/openssl@1.1/lib/libssl.a)
+  if (x86_64_LIB)
+    set(libcrypto ${ROOT_LIB}/openssl@1.1/lib/libcrypto.a)
+    set(libssl ${ROOT_LIB}/openssl@1.1/lib/libssl.a)
+  else()
+    set(libcrypto ${ROOT_LIB}/openssl@1.1/1.1.1v/lib/libcrypto.a)
+    set(libssl ${ROOT_LIB}/openssl@1.1/1.1.1v/lib/libssl.a)
+  endif()
 endif()
 
-
-# set (libfmt ${ROOT_LIB}/fmt/10.1.1/lib/libfmt.a)
-set (libfmt ${ROOT_LIB}/fmt/lib/libfmt.a)
+if (x86_64_LIB)
+  set (libfmt ${ROOT_LIB}/fmt/lib/libfmt.a)
+else()
+  set (libfmt ${ROOT_LIB}/fmt/10.1.1/lib/libfmt.a)
+endif()
 
 add_library(ccex ${SOURCES})
-target_include_directories(ccex
-PUBLIC
-  ${CMAKE_CURRENT_SOURCE_DIR}/Inc
-  # ${ROOT_LIB}/boost/1.82.0_1/include
-  # ${ROOT_LIB}/nlohmann-json/3.11.2/include
-  # ${ROOT_LIB}/spdlog/1.12.0/include
-  # ${ROOT_LIB}/curl/8.3.0/include
-  # ${ROOT_LIB}/fmt/10.1.1/include # dependency of spdlog
-  ${ROOT_LIB}/boost/include
-  ${ROOT_LIB}/nlohmann-json/include
-  ${ROOT_LIB}/spdlog/include
-  ${ROOT_LIB}/curl/include
-  ${ROOT_LIB}/fmt/include # dependency of spdlog
+
+if (x86_64_LIB)
+  target_include_directories(ccex
+  PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+    ${ROOT_LIB}/boost/include
+    ${ROOT_LIB}/nlohmann-json/include
+    ${ROOT_LIB}/spdlog/include
+    ${ROOT_LIB}/curl/include
+    ${ROOT_LIB}/fmt/include # dependency of spdlog
   )
+else()
+  target_include_directories(ccex
+  PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+    ${ROOT_LIB}/boost/1.82.0_1/include
+    ${ROOT_LIB}/nlohmann-json/3.11.2/include
+    ${ROOT_LIB}/spdlog/1.12.0/include
+    ${ROOT_LIB}/curl/8.3.0/include
+    ${ROOT_LIB}/fmt/10.1.1/include # dependency of spdlog
+  )
+endif()
 
 target_link_libraries(ccex
 PUBLIC
