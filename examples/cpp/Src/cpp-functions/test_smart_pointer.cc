@@ -1,7 +1,16 @@
 #include <iostream>
 
-int testSmartPointer()
-{
+class TestSmartPointer {
+ public:
+		TestSmartPointer() {
+				std::cout << "TestSmartPointer constructor" << std::endl;
+		}
+		~TestSmartPointer() {
+				std::cout << "TestSmartPointer destructor" << std::endl;
+		}
+};
+
+void test_smart_pointer(void) {
     // smart ptr call = constructor
     // weak pointer, reference pointer 
     std::unique_ptr<int> usamrt_ptr(new int[10]);
@@ -18,6 +27,8 @@ int testSmartPointer()
     std::cout << "After ssmart_ptr_3: " << ssmart_ptr_3.get() << std::endl;
 
 
-
-    return 0;
+		std::unique_ptr<TestSmartPointer> test_smart_ptr;
+		test_smart_ptr = std::make_unique<TestSmartPointer>();
+		test_smart_ptr = std::make_unique<TestSmartPointer>();
+		// while(true){};
 }
