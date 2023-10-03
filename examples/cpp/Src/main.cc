@@ -6,8 +6,12 @@
             leaks --atExit --list -- *.exe
 */
 
+
 // Practice Data Structures in HackerRank Youtube
 // #define TEST_ALGORITHM_PRACTICE 
+
+// Practice C Function
+#define TEST_C_FUNCTION
 
 // Practice C++ Functions
 #define TEST_CPP_FUNCTION
@@ -21,7 +25,6 @@
 #define TEST_DESIGN_PATTERN
 
 #include <iostream>  // std::cout
-
 #include "../Inc/log.hpp"
 
 #ifdef TEST_ALGORITHM_EXAM
@@ -30,6 +33,10 @@
 
 #ifdef TEST_CPP_FUNCTION
 #include "../Inc/test_cpp_function.hpp"
+#endif
+
+#ifdef TEST_C_FUNCTION
+#include "../Inc/test_c_function.h"
 #endif
 
 #ifdef TEST_DESIGN_PATTERN
@@ -67,17 +74,17 @@ int main(void) {
 #endif
 
 #ifdef TEST_CPP_FUNCTION
-    // test_smart_pointer();
-    // testClassAddress();
-    // testChrono();
-    // testDataStructure();
-    // testDateTime();
-    // testMemAllocate();
-    // testRand();
-    // test_vector();
-    // test_typedef();
-    // test_end_func_const();
-    // test_ref();
+  // test_smart_pointer();
+  // testClassAddress();
+  // testChrono();
+  // testDataStructure();
+  // testDateTime();
+  // testMemAllocate();
+  // testRand();
+  // test_vector();
+  // test_typedef();
+  // test_end_func_const();
+  // test_ref();
   // testClassAddress();
   // testChrono();
   // testDataStructure();
@@ -123,16 +130,16 @@ int main(void) {
   // test_constructor_lambda();
   // test_transfer_lambda();
 
-    /* function/test_function.cc */
-    // test_callable();
-    // test_std_func();
-    // test_member_class_function();
-    // test_memfn();
-    // test_bind();
-    
-    /* function/test_function_pointer.cc */
-    // test_func_ptr();    
-    // test_share_ptr_lambda();
+  /* function/test_function.cc */
+  // test_callable();
+  // test_std_func();
+  // test_member_class_function();
+  // test_memfn();
+  // test_bind();
+
+  /* function/test_function_pointer.cc */
+  // test_func_ptr();
+  // test_share_ptr_lambda();
   /* function/test_function.cc */
   // test_callable();
   // test_std_func();
@@ -151,8 +158,22 @@ int main(void) {
   // test_constexp();
 
   /* test_struct.cc*/
-  test_struct_inheritance();
+  // test_struct_inheritance();
 
+  /* test_post_prefix.cc */
+  // test_post_pre_fix();
+
+  /* test_void.cc*/
+  // test_void();
+#endif
+
+#ifdef TEST_C_FUNCTION
+  /* static_func/test_static_func */
+  // test_static_func();
+  // TEST_STATIC_FUNC()
+
+  /* test_define_func */
+  test_define_func();
 #endif
 
 #ifdef TEST_DESIGN_PATTERN
@@ -174,7 +195,7 @@ int main(void) {
 
 
 #ifdef TEST_LIBRARY
-    test_chronos_time();
+    // test_chronos_time();
 #endif
 #ifdef TEST_BOOST
     // test_xml_parse();

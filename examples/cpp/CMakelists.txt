@@ -10,6 +10,8 @@ file(GLOB SRC_FILES
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/cpp-functions/thread/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/cpp-functions/rvalue/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/cpp-functions/function/*.cc"
+     "${CMAKE_CURRENT_SOURCE_DIR}/Src/c-functions/*.c"
+     "${CMAKE_CURRENT_SOURCE_DIR}/Src/c-functions/static_func/*.c"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/design-pattern/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/design-pattern/*.c"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/utils/*.cc"

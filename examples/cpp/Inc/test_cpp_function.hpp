@@ -1,5 +1,5 @@
-#ifndef TESTCLASS_H
-#define TESTCLASS_H
+#ifndef TEST_CPP_FUNCTIONS_H
+#define TEST_CPP_FUNCTIONS_H
 
 void test_smart_pointer(void);
 void testClassAddress(void);
@@ -68,4 +68,11 @@ void test_constexp(void);
 
 // test_struct.cc
 void test_struct_inheritance(void);
+
+// test_post_prefix.cc
+void test_post_pre_fix(void);
+
+// test_void.cc
+void test_void(void);
+
 #endif
