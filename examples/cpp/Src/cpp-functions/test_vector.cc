@@ -39,11 +39,26 @@ void _test_vector_reference(const std::vector<std::string>& project_paths) {
     }
 }
 
+
+void _test_vector_init(void) {
+    std::vector<int16_t> audio_sample(22050);
+    int16_t buf[11025];
+    for (int i = 0; i < 11025; i++) {
+        buf[i] = 2;
+    }
+    audio_sample = {buf, buf + 11025};
+
+    for (auto& sample : audio_sample) {
+        std::cout << sample << " ";
+    }
+}
+
 void test_vector() {
     // std::cout << "test_vector_reference" << std::endl;
-    // std::vector<std::string> project_paths = {"practice/Src/test/test_vector_reference.cc", \
-    //                                         "practice/Src/test/test_vector_reference2.cc"};
+    // std::vector<std::string> project_paths = {
+    //                  "practice/Src/test/test_vector_reference.cc", \
+    //                  "practice/Src/test/test_vector_reference2.cc"};
     // _test_vector_reference(project_paths);
-
-    _test_vector_assign();
+    // _test_vector_assign();
+    _test_vector_init();
 }
