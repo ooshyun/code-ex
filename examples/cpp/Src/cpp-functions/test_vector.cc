@@ -63,9 +63,12 @@ void _test_vector_init() {
 
 void test_vector() {
     // std::cout << "test_vector_reference" << std::endl;
-    // std::vector<std::string> project_paths = {"practice/Src/test/test_vector_reference.cc", \
-    //                                         "practice/Src/test/test_vector_reference2.cc"};
+    // std::vector<std::string> project_paths = {
+    //                  "practice/Src/test/test_vector_reference.cc", \
+    //                  "practice/Src/test/test_vector_reference2.cc"};
     // _test_vector_reference(project_paths);
+    // _test_vector_assign();
+    _test_vector_init();
     // _test_vector_assign();
     _test_vector_init();
 }

@@ -53,7 +53,7 @@
 
 int main(void) {
   practice::log_init(0);
-  LOG_DEBUG("Start main function");
+  LOG_DEBUG("Start main function ");
 #ifdef TEST_ALGORITHM_EXAM
   // 1. Practice Data Structures in HackerRank Youtube
   // testBalancedParenthesesinExpression();
@@ -91,7 +91,6 @@ int main(void) {
   // testDateTime();
   // testMemAllocate();
   // testRand();
-  // test_vector();
   // test_typedef();
   // test_end_func_const();
   // test_ref();
@@ -196,6 +195,8 @@ int main(void) {
 
 #ifdef TEST_LIBRARY
     // test_chronos_time();
+    test_temp_file();
+    test_append_file();
     test_copy_fs();
 #endif
 #ifdef TEST_BOOST
