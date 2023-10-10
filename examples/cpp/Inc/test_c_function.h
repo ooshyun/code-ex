@@ -7,7 +7,12 @@ void test_static_func(void);
 
 // test_define_func.c
 void test_define_func(void);
+
+// test_switch_func.c
+void test_switch_func(void);
+
 }
+
 
 #include "../Src/c-functions/static_func/test_static_func_internal.h"
 #define TEST_STATIC_FUNC()          \

@@ -74,7 +74,7 @@ int main(void) {
 #endif
 
 #ifdef TEST_CPP_FUNCTION
-  // test_smart_pointer();
+  test_smart_pointer();
   // testClassAddress();
   // testChrono();
   // testDataStructure();
@@ -173,6 +173,9 @@ int main(void) {
 
   /* test_define_func */
   // test_define_func();
+
+  /* test_switch_func */
+  // test_switch_func();
 #endif
 
 #ifdef TEST_DESIGN_PATTERN
@@ -195,9 +198,9 @@ int main(void) {
 
 #ifdef TEST_LIBRARY
     // test_chronos_time();
-    test_temp_file();
-    test_append_file();
-    test_copy_fs();
+    // test_temp_file();
+    // test_append_file();
+    // test_copy_fs();
 #endif
 #ifdef TEST_BOOST
     // test_xml_parse();
