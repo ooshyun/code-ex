@@ -173,7 +173,7 @@ int main(void) {
   // TEST_STATIC_FUNC()
 
   /* test_define_func */
-  test_define_func();
+  // test_define_func();
 #endif
 
 #ifdef TEST_DESIGN_PATTERN
@@ -196,6 +196,7 @@ int main(void) {
 
 #ifdef TEST_LIBRARY
     // test_chronos_time();
+    test_copy_fs();
 #endif
 #ifdef TEST_BOOST
     // test_xml_parse();
