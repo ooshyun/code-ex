@@ -39,18 +39,26 @@ void _test_vector_reference(const std::vector<std::string>& project_paths) {
     }
 }
 
+void _test_vector_init() {
+    std::vector<int16_t> samples(10, 0);
+    int16_t buf[5] = {1, 2, 3, 4, 5};
+    // int16_t buf[5] = {0};
 
-void _test_vector_init(void) {
-    std::vector<int16_t> audio_sample(22050);
-    int16_t buf[11025];
-    for (int i = 0; i < 11025; i++) {
-        buf[i] = 2;
-    }
-    audio_sample = {buf, buf + 11025};
-
-    for (auto& sample : audio_sample) {
+    for (auto& sample : samples) {
         std::cout << sample << " ";
     }
+    std::cout << std::endl;
+    std::cout << "vector size: " << samples.size() << std::endl;
+
+    samples = {buf, buf + 5};
+    std::cout << "vector size: " << samples.size() << std::endl;
+
+    samples.insert(samples.begin()+5, &buf[0], &buf[5]);
+    for (auto& sample : samples) {
+        std::cout << sample << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "vector size: " << samples.size() << std::endl;
 }
 
 void test_vector() {
@@ -59,6 +67,8 @@ void test_vector() {
     //                  "practice/Src/test/test_vector_reference.cc", \
     //                  "practice/Src/test/test_vector_reference2.cc"};
     // _test_vector_reference(project_paths);
+    // _test_vector_assign();
+    _test_vector_init();
     // _test_vector_assign();
     _test_vector_init();
 }

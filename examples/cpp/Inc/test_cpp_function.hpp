@@ -78,4 +78,9 @@ void test_void(void);
 // test_var_type.cc
 void test_const(void);
 
+// test_exec.cc
+void test_exec(void);
+
+// test_string.cc
+void test_string(void);
 #endif

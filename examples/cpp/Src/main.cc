@@ -158,8 +158,14 @@ int main(void) {
   /* test_post_prefix.cc */
   // test_post_pre_fix();
 
-  /* test_void.cc*/
+  /* test_void.cc */
   // test_void();
+
+  /* test_exec.cc */
+  // test_exec();
+
+  /* test_string.cc */
+  test_string();
 
   /* test_var_type.cc */
   test_const();
@@ -172,6 +178,9 @@ int main(void) {
 
   /* test_define_func */
   // test_define_func();
+
+  /* test_switch_func */
+  // test_switch_func();
 #endif
 
 #ifdef TEST_DESIGN_PATTERN
@@ -195,6 +204,9 @@ int main(void) {
 #ifdef TEST_LIBRARY
     // test_time();
     // test_chronos_time();
+    // test_temp_file();
+    // test_append_file();
+    // test_copy_fs();
     // test_temp_file();
     // test_append_file();
     // test_file_read();
