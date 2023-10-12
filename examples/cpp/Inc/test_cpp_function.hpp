@@ -75,4 +75,9 @@ void test_post_pre_fix(void);
 // test_void.cc
 void test_void(void);
 
+// test_exec.cc
+void test_exec(void);
+
+// test_string.cc
+void test_string(void);
 #endif

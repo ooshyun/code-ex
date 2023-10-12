@@ -74,7 +74,7 @@ int main(void) {
 #endif
 
 #ifdef TEST_CPP_FUNCTION
-  test_smart_pointer();
+  // test_smart_pointer();
   // testClassAddress();
   // testChrono();
   // testDataStructure();
@@ -162,8 +162,14 @@ int main(void) {
   /* test_post_prefix.cc */
   // test_post_pre_fix();
 
-  /* test_void.cc*/
+  /* test_void.cc */
   // test_void();
+
+  /* test_exec.cc */
+  // test_exec();
+
+  /* test_string.cc */
+  test_string();
 #endif
 
 #ifdef TEST_C_FUNCTION
