@@ -75,4 +75,7 @@ void test_post_pre_fix(void);
 // test_void.cc
 void test_void(void);
 
+// test_var_type.cc
+void test_const(void);
+
 #endif

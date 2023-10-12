@@ -5,10 +5,11 @@
         2. test memory leakage
             leaks --atExit --list -- *.exe
 */
-
+#include <iostream>  // std::cout
+#include "../Inc/log.hpp"
 
 // Practice Data Structures in HackerRank Youtube
-// #define TEST_ALGORITHM_PRACTICE 
+#define TEST_ALGORITHM_PRACTICE
 
 // Practice C Function
 #define TEST_C_FUNCTION
@@ -24,10 +25,7 @@
 #define TEST_LIBRARY
 #define TEST_DESIGN_PATTERN
 
-#include <iostream>  // std::cout
-#include "../Inc/log.hpp"
-
-#ifdef TEST_ALGORITHM_EXAM
+#ifdef TEST_ALGORITHM_PRACTICE
 #include "../Inc/data_structure.hpp"
 #endif
 
@@ -54,7 +52,7 @@
 int main(void) {
   practice::log_init(0);
   LOG_DEBUG("Start main function ");
-#ifdef TEST_ALGORITHM_EXAM
+#ifdef TEST_ALGORITHM_PRACTICE
   // 1. Practice Data Structures in HackerRank Youtube
   // testBalancedParenthesesinExpression();
   // testQueueWithTwoStack();
@@ -69,8 +67,6 @@ int main(void) {
 
   // 2. Practice Recursion in HackerRank Youtube
   // testGraph();
-  // testBFS();
-  // testDFS();
 #endif
 
 #ifdef TEST_CPP_FUNCTION
@@ -164,6 +160,9 @@ int main(void) {
 
   /* test_void.cc*/
   // test_void();
+
+  /* test_var_type.cc */
+  test_const();
 #endif
 
 #ifdef TEST_C_FUNCTION
@@ -194,10 +193,14 @@ int main(void) {
 
 
 #ifdef TEST_LIBRARY
+    // test_time();
     // test_chronos_time();
-    test_temp_file();
-    test_append_file();
+    // test_temp_file();
+    // test_append_file();
+    // test_file_read();
+    // test_file_access();
 #endif
+
 #ifdef TEST_BOOST
     // test_xml_parse();
     // test_xml_parse_complicate();
