@@ -19,15 +19,36 @@ set(CMAKE_C_COMPILER_FORCED TRUE)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
+
+option(BUILD_TESTS "Build all tests." OFF)
+# TODO(oohyun): TBD, after learning how to use it
+# Current error is finding gtestxx library and header files
 if (BUILD_TESTS)
-  include(FetchContent)
-  FetchContent_Declare(
-    googletest
-    URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-  )
-  # For Windows: Prevent overriding the parent project's compiler/linker settings
-  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-  FetchContent_MakeAvailable(googletest)
+  # include(FetchContent)
+  # FetchContent_Declare(
+  #   googletest
+  #   URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+  # )
+  # # For Windows: Prevent overriding the parent project's compiler/linker settings
+  # set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  # FetchContent_MakeAvailable(googletest)
+
+  # if (APPLE)
+  #   add_definitions(-DGTEST_USE_OWN_TR1_TUPLE)
+  #   add_definitions(-D__GLIBCXX__)
+  # endif (APPLE)
+
+  # # This adds another subdirectory, which has 'project(gtest)'.
+  # add_subdirectory(examples/cpp/third_party/googletest)
+
+  # enable_testing()
+
+  # # Include the gtest library. gtest_SOURCE_DIR is available due to
+  # # 'project(gtest)' above.
+  # include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+
+  # set(GTEST_LIBRARIES gtest gtest_main gmock gmock_main)
+  include(cmake/code-coverage.cmake)
   add_subdirectory(tests)
 endif()
 
