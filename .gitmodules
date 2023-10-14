@@ -1,0 +1,27 @@
+[submodule "examples/cpp/third_party/tensorflow"]
+	path = examples/cpp/third_party/tensorflow
+	url = git@github.com:tensorflow/tensorflow.git
+[submodule "examples/cpp/third_party/flatbuffers"]
+	path = examples/cpp/third_party/flatbuffers
+	url = git@github.com:google/flatbuffers.git
+[submodule "examples/cpp/third_party/spdlog"]
+	path = examples/cpp/third_party/spdlog
+	url = git@github.com:gabime/spdlog.git
+[submodule "examples/cpp/third_party/json"]
+	path = examples/cpp/third_party/json
+	url = git@github.com:nlohmann/json.git
+[submodule "examples/cpp/third_party/curl"]
+	path = examples/cpp/third_party/curl
+	url = git@github.com:curl/curl.git
+[submodule "examples/cpp/third_party/openssl"]
+	path = examples/cpp/third_party/openssl
+	url = git@github.com:openssl/openssl.git
+[submodule "examples/cpp/third_party/jwt-cpp"]
+	path = examples/cpp/third_party/jwt-cpp
+	url = git@github.com:Thalhammer/jwt-cpp.git
+[submodule "examples/cpp/third_party/zlib"]
+	path = examples/cpp/third_party/zlib
+	url = git@github.com:madler/zlib.git
+[submodule "examples/cpp/third_party/googletest"]
+	path = examples/cpp/third_party/googletest
+	url = git@github.com:google/googletest.git

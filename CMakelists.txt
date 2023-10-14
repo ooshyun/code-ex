@@ -3,12 +3,6 @@ project(cppexample VERSION 0.1.0)
 
 enable_testing()
 
-# set(CMAKE_OSX_ARCHITECTURES x86_64)
-set(CMAKE_OSX_ARCHITECTURES arm64)
-
-# set(CMAKE_CXX_COMPILER /opt/homebrew/opt/llvm/bin/clang++)
-# set(CMAKE_CXX_COMPILER /usr/bin/clang++)
-
 message(STATUS "CMAKE_OSX_ARCHITECTURES: ${CMAKE_OSX_ARCHITECTURES}")
 message(STATUS "CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
 
@@ -24,6 +18,22 @@ set(CMAKE_C_COMPILER_FORCED TRUE)
 # set(TARGET_ROOT_DIR ${PROJECT_SOURCE_DIR}/sdk_build/${CMAKE_BUILD_TYPE})
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+
+if (BUILD_TESTS)
+  include(FetchContent)
+  FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+  )
+  # For Windows: Prevent overriding the parent project's compiler/linker settings
+  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  FetchContent_MakeAvailable(googletest)
+  add_subdirectory(tests)
+endif()
+
+# set options
+# --verbose
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # # add coding-test
 add_subdirectory(examples/cpp)
