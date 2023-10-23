@@ -27,4 +27,42 @@ void test_string(void) {
     } else {
         std::cout << "str_x is not empty" << std::endl;
     }
+
+    char* tmp_char_ptr;
+    size_t tmp_size = 0;
+    const size_t size = 14;
+    char char_ptr_y[size]="Hello World";
+    tmp_char_ptr = &char_ptr_y[0];
+    while (*tmp_char_ptr != '\0') {
+        std::cout << "char_ptr_y["
+                << tmp_size
+                << "] : "
+                << *tmp_char_ptr
+                << std::endl;
+        tmp_size++;
+        tmp_char_ptr++;
+    }
+    tmp_size = 0;
+
+    std::string str_y(static_cast<char *>(char_ptr_y), size);
+    std::cout << "str_y : " << str_y << std::endl;
+    std::cout << "str_y size : " << str_y.size() << std::endl;
+    std::string str_z = "+Hello World";
+    tmp_char_ptr = &str_z[0];
+    while (*tmp_char_ptr != '\0') {
+        std::cout << "str_z["
+                << tmp_size
+                << "] : "
+                << *tmp_char_ptr
+                << std::endl;
+        tmp_size++;
+        tmp_char_ptr++;
+    }
+    tmp_size = 0;
+
+    std::cout << "str_z : " << str_z << std::endl;
+    // confirm last of string has \0
+    std::cout<< "str_z size : " << str_z.size() << std::endl;
+    std::cout << "Start:" << str_y + str_z << std::endl;
+
 }
