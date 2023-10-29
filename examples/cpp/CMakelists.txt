@@ -15,6 +15,8 @@ file(GLOB SRC_FILES
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/cpp-functions/function/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/c-functions/*.c"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/c-functions/static_func/*.c"
+     "${CMAKE_CURRENT_SOURCE_DIR}/Src/algorithm/*.c"
+     "${CMAKE_CURRENT_SOURCE_DIR}/Src/algorithm/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/design-pattern/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/design-pattern/*.c"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/utils/*.cc"
@@ -26,15 +28,14 @@ file(GLOB SRC_FILES
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/boost/property_tree/*.cc"
      )
 set(SOURCES "${SRC_FILES}")
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
-message("${CMAKE_CURRENT_SOURCE_DIR}")
 # print sources
+message(STATUS "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
 message("--SOURCES--")
 message(${SOURCES})
 message("-----------")
 
-if (CMAKE_OSX_ARCHITECTURES MATCHES "arm64")
+if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
   set(ROOT_LIB "/opt/homebrew/Cellar/")
 else()
   set(ROOT_LIB "/usr/local/opt/")
