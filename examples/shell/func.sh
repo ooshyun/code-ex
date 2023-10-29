@@ -21,3 +21,13 @@ echo "---------"
 echo "  Case 2"
 greet "ls -h > echo.txt" "Smith Johnson"
 echo "---------"
+
+greet_int () {
+    echo "Hello, $1"
+}
+
+echo "  Case 3"
+greet_int 3
+echo "---------"
+
+

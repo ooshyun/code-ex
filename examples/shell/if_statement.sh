@@ -29,3 +29,15 @@ if [ $test3 -eq 2 ]
 then
     echo "test2 variable is 2"
 fi
+
+test_str="abcd"
+
+if [ $test_str = "abc" ]
+then
+    echo "test_str is abc"
+elif [ $test_str = "abcd" ]
+then
+    echo "test_str is abcd"
+else
+    echo "test_str is not abc"
+fi
