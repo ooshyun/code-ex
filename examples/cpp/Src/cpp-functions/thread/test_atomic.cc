@@ -1,4 +1,6 @@
-// https://modoocode.com/271
+/* 
+  Copyright from https://modoocode.com/271
+*/
 
 #include <atomic>
 #include <iostream>
@@ -18,24 +20,29 @@ std::atomic<bool> x_seq_cst(false);
 std::atomic<bool> y_seq_cst(false);
 std::atomic<int> z_seq_cst(0);
 
-void worker(std::atomic<int>& counter) {
 // void worker(int* counter) {
+void worker (std::atomic<int>& counter) {  // NOLINT
   for (int i = 0; i < 10000; i++) {
-    counter++;
     // (*counter)++;
+    counter++;
   }
 }
 
 
-void test_atomic(void) {
+void _test_atomic(void) {
     printf("  test_atomic\n");
     std::atomic<int> counter(0);
+
+    // lock_free 1 means its operation works well without mutex
+    std::cout << "is lock free ? : "
+              << counter.is_lock_free()
+              << std::endl;
     // int counter = 0;
 
     std::vector<std::thread> workers;
     for (int i = 0; i < 4; i++) {
-        workers.push_back(std::thread(worker, ref(counter)));
         // workers.push_back(std::thread(worker, &counter));
+        workers.push_back(std::thread(worker, ref(counter)));
     }
 
     for (int i = 0; i < 4; i++) {
@@ -74,7 +81,6 @@ void test_memory_order_relaxed(void) {
   }
 }
 
-
 void worker_atomic_memory_order_relaxed(std::atomic<int>* counter) {
   for (int i = 0; i < 10000; i++) {
     // 다른 연산들 수행
@@ -104,50 +110,50 @@ void test_atomic_memory_order_relaxed(void) {
 
 void producer(std::atomic<bool>* is_ready, int* data) {
   *data = 10;
+
+  // *data = 10 should not be under the line of
+  // is_ready->store(true, std::memory_order_release);
   is_ready->store(true, std::memory_order_release);
-  
+
   data_arr[0].store(1, memory_order_relaxed);
   data_arr[1].store(2, memory_order_relaxed);
   data_arr[2].store(3, memory_order_relaxed);
   is_ready_global.store(true, std::memory_order_release);
 }
 
+// data 가 준비될 때 까지 기다린다.
 void consumer(std::atomic<bool>* is_ready, int* data) {
-    // data 가 준비될 때 까지 기다린다.
+  while (!is_ready->load(std::memory_order_acquire)) {
+  }
 
-    while (!is_ready->load(std::memory_order_acquire)) {
-    }
+  std::cout << "Data : " << *data << std::endl;
 
-    std::cout << "Data : " << *data << std::endl;
+  while (!is_ready_global.load(std::memory_order_acquire)) {
+  }
+  std::cout << "data[0] : " \
+    << data_arr[0].load(memory_order_relaxed) << std::endl;
+  std::cout << "data[1] : " \
+    << data_arr[1].load(memory_order_relaxed) << std::endl;
+  std::cout << "data[2] : " \
+    << data_arr[2].load(memory_order_relaxed) << std::endl;
 
-    while (!is_ready_global.load(std::memory_order_acquire)) {
-    }
-    std::cout << "data[0] : " \
-      << data_arr[0].load(memory_order_relaxed) << std::endl;
-    std::cout << "data[1] : " \
-      << data_arr[1].load(memory_order_relaxed) << std::endl;
-    std::cout << "data[2] : " \
-      << data_arr[2].load(memory_order_relaxed) << std::endl;
-
-    std::atomic_thread_fence(std::memory_order_acquire);
-
+  // memory order synchronize
+  std::atomic_thread_fence(std::memory_order_acquire);
 }
 
 void test_atomic_rel_ack(void) {
-    std::vector<std::thread> threads;
+  std::vector<std::thread> threads;
 
-    std::atomic<bool> is_ready(false);
-    int data = 0;
+  std::atomic<bool> is_ready(false);
+  int data = 0;
 
-    threads.push_back(std::thread(producer, &is_ready, &data));
-    threads.push_back(std::thread(consumer, &is_ready, &data));
+  threads.push_back(std::thread(producer, &is_ready, &data));
+  threads.push_back(std::thread(consumer, &is_ready, &data));
 
-    for (int i = 0; i < 2; i++) {
-        threads[i].join();
-    }
+  for (int i = 0; i < 2; i++) {
+      threads[i].join();
+  }
 }
-
-
 
 void write_x_rel() { x.store(true, std::memory_order_release); }
 
@@ -178,10 +184,13 @@ void test_atomic_rel_ack_sequence(void) {
   b.join();
   c.join();
   d.join();
-  std::cout << "z : " << z << std::endl;
+  std::cout << "z : " << z << std::endl;  // z is atomic
 }
 
-
+/* 
+  memory_order_seq_cst is very expensive operation in arm cpu.
+  but in intel x86_64, amd x86_64 have few difference.
+*/
 void write_x_seq_cst() { x_seq_cst.store(true, std::memory_order_seq_cst); }
 
 void write_y_seq_cst() { y_seq_cst.store(true, std::memory_order_seq_cst); }
@@ -190,15 +199,15 @@ void read_x_then_y_seq_cst() {
   while (!x_seq_cst.load(std::memory_order_seq_cst)) {
   }
   if (y_seq_cst.load(std::memory_order_seq_cst)) {
-    ++z;
+    ++z_seq_cst;
   }
 }
 
 void read_y_then_x_seq_cst() {
-  while (!y_seq_cst.load(std::memory_order_acquire)) {
+  while (!y_seq_cst.load(std::memory_order_seq_cst)) {
   }
-  if (x_seq_cst.load(std::memory_order_acquire)) {
-    ++z;
+  if (x_seq_cst.load(std::memory_order_seq_cst)) {
+    ++z_seq_cst;
   }
 }
 
@@ -212,4 +221,14 @@ void test_atomic_seq_cst_sequence(void) {
   c.join();
   d.join();
   std::cout << "z : " << z_seq_cst << std::endl;
+}
+
+void test_atomic(void) {
+  _test_atomic();
+  // test_memory_order_relaxed();
+  // test_atomic_memory_order_relaxed();
+  // test_atomic_rel_ack();
+  // test_atomic_rel_ack_sequence();
+  // test_atomic_seq_cst_sequence();
+  // FYI. There is memory_order_acq_rel also.
 }

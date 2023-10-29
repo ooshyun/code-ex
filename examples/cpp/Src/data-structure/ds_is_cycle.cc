@@ -6,7 +6,7 @@ struct NodeTestCycle{
     struct NodeTestCycle* next;
 };
 
-bool is_cycle(NodeTestCycle* start){
+bool is_cycle(NodeTestCycle* start) {
     // race with speed a, b, then if cycle then it will meet
     if (start == nullptr) return false;
     if (start->next == nullptr) return false;
@@ -14,8 +14,9 @@ bool is_cycle(NodeTestCycle* start){
     NodeTestCycle* fastNode = start->next;
     NodeTestCycle* slowNode = start;
 
-    while((fastNode!=nullptr) && (fastNode->next!=nullptr) && (slowNode!=nullptr)){
-        if (fastNode == slowNode){
+    while((fastNode!=nullptr) && (fastNode->next!=nullptr)
+                            && (slowNode!=nullptr)) {
+        if (fastNode == slowNode) {
             return true;
         }
         fastNode = fastNode->next->next;
@@ -24,7 +25,7 @@ bool is_cycle(NodeTestCycle* start){
     return false;
 }
 
-void testIsCycle(){
+void testIsCycle() {
     int testArr[] = {1,2,3,4,5,6};
 
     NodeTestCycle* head = new NodeTestCycle;
@@ -46,7 +47,7 @@ void testIsCycle(){
     cycleNode = bufNode;
     bufNode->data = testArr[3];
     bufNode->next = new NodeTestCycle;
-    
+
     bufNode = bufNode->next;
     bufNode->data = testArr[4];
     bufNode->next = new NodeTestCycle;

@@ -26,6 +26,7 @@
 #define TEST_DESIGN_PATTERN
 
 #ifdef TEST_ALGORITHM_PRACTICE
+#include "../Inc/algorithm.hpp"
 #include "../Inc/data_structure.hpp"
 #endif
 
@@ -66,7 +67,7 @@ int main(void) {
   // testMinHeap();
 
   // 2. Practice Recursion in HackerRank Youtube
-  // testGraph();
+  // test_graph();
 #endif
 
 #ifdef TEST_CPP_FUNCTION
@@ -94,21 +95,9 @@ int main(void) {
   // test_thread();
   // test_thread_pattern();
   // test_atomic();
-  // test_memory_order_relaxed();
-  // test_atomic_memory_order_relaxed();
-  // test_atomic_rel_ack();
-  // test_atomic_rel_ack_sequence();
-  // test_atomic_seq_cst_sequence();
-
-  // test_promise_future_scratch();
-  // test_promise_future();
-  // test_wait_for();
-  // test_shared_future();
-  // test_packaged_task();
-  // test_async();
-  // test_sync_vs_async_sync();
-  // test_sync_vs_async_async();
+  // test_sync_and_async();
   // test_thread_pool();
+
   // test_copy_elision();
   // test_rvalue_simple();
   // test_rvalue();
@@ -146,6 +135,9 @@ int main(void) {
   // test_func_ptr();
   // test_share_ptr_lambda();
 
+  /* function/test_function_argument.cc */
+  test_function_argument();
+
   /* test_unifomr_init.cc */
   // test_uniform_init();
 
@@ -165,10 +157,16 @@ int main(void) {
   // test_exec();
 
   /* test_string.cc */
-  test_string();
+  // test_string();
 
   /* test_var_type.cc */
-  test_const();
+  // test_const();
+
+  /* test_rtti.cc */
+  // test_rtti();
+
+  /* test_exception.cc */
+  // test_exception();
 #endif
 
 #ifdef TEST_C_FUNCTION

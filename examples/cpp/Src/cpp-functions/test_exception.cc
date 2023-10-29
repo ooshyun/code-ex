@@ -189,5 +189,4 @@ void test_exception(void) {
     test_excpetion_example_4();     // exception inheritance and catch
     test_excpetion_example_5();     // catch all
     // test_excpetion_example_6();     //  noexcept
-    
 }

@@ -15,6 +15,13 @@ else()
 endif()
 
 
+# set(TEST_OPTION 3)
+if (NOT TEST_OPTION)
+    message("option is not set")
+else()
+    message("option is already set")
+endif()
+
 if (APPLE)
     message("apple")
 elseif (WIN32)

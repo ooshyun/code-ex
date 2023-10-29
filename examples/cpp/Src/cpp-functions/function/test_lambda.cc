@@ -37,15 +37,15 @@ void test_basic_lambda(void) {
     auto f = []() -> void { std::cout << "foo" << std::endl; };
     f();
     []() { std::cout << "foo" << std::endl; }();
-    [](int v) { std::cout << v << "*6=" << v * 6 << std::endl; }(7); 
-    //     
+    [](int v) { std::cout << v << "*6=" << v * 6 << std::endl; }(7);
+
     int i = 7;
     [](int& v) { v *= 6; }(i);
     std::cout << "the correct value is: " << i << std::endl;
 }
 
 template <typename T>
-void fill(std::vector<int>& v, T done) {
+void fill(std::vector<int>& v, T done) {  // NOLINT
     int i = 0;
     while (!done()) {
         v.push_back(i++);

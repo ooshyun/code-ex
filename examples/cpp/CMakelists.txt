@@ -104,6 +104,18 @@ else()
 endif()
 
 add_library(ccex ${SOURCES})
+target_compile_options(ccex 
+PRIVATE
+  -Wall                # enable all warnings
+  # -Wextra              # enable extra warnings
+  # -pedantic            # enforce strict ANSI/ISO compliance
+  -O0                  # enable optimization
+  # -g                   # enable debugging symbols
+  # -c                   # generate object files only
+  # -S                   # generate assembly language output
+  # -save-temps
+  # -masm=intel          # use Intel syntax for assembly output
+)
 
 if (x86_64_LIB)
   target_include_directories(ccex
@@ -139,11 +151,12 @@ PUBLIC
 
 add_executable(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/Src/main.cc")
 
-target_compile_options(${PROJECT_NAME} PRIVATE
+target_compile_options(${PROJECT_NAME}
+PRIVATE
   -Wall                # enable all warnings
   # -Wextra              # enable extra warnings
   # -pedantic            # enforce strict ANSI/ISO compliance
-  # -O2                  # enable optimization
+  # -O3                  # enable optimization
   # -g                   # enable debugging symbols
   # -c                   # generate object files only
   # -S                   # generate assembly language output
@@ -158,6 +171,14 @@ PUBLIC
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ccex)
 
+
+get_target_property(MAIN_CFLAGS ccex COMPILE_OPTIONS)
+# also see: COMPILE_DEFINITIONS INCLUDE_DIRECTORIES
+message(STATUS "Target ccex compiler flags are: ${MAIN_CFLAGS}")
+
+
+get_target_property(MAIN_CFLAGS ${PROJECT_NAME} COMPILE_OPTIONS)
+message(STATUS "Target ${PROJECT_NAME} compiler flags are: ${MAIN_CFLAGS}")
 
 # install(TARGETS ${PROJECT_NAME} DESTINATION /usr/local/lib)
 # install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/sense DESTINATION /usr/local/include)

@@ -1,8 +1,0 @@
-/Users/seunghyunoh/workplace/examplace/practice/cmake/CMakeFiles/test.dir
-/Users/seunghyunoh/workplace/examplace/practice/cmake/CMakeFiles/edit_cache.dir
-/Users/seunghyunoh/workplace/examplace/practice/cmake/CMakeFiles/rebuild_cache.dir
-/Users/seunghyunoh/workplace/examplace/practice/cmake/examples/cpp/CMakeFiles/ccex.dir
-/Users/seunghyunoh/workplace/examplace/practice/cmake/examples/cpp/CMakeFiles/cppexample.dir
-/Users/seunghyunoh/workplace/examplace/practice/cmake/examples/cpp/CMakeFiles/test.dir
-/Users/seunghyunoh/workplace/examplace/practice/cmake/examples/cpp/CMakeFiles/edit_cache.dir
-/Users/seunghyunoh/workplace/examplace/practice/cmake/examples/cpp/CMakeFiles/rebuild_cache.dir

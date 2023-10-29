@@ -1,0 +1,15 @@
+##############
+# Unit Tests
+##############
+set( UNIT_TEST_BIN_NAME tests )
+
+project(${UNIT_TEST_BIN_NAME})
+
+file(GLOB TESTS_SRC
+  ${PROJECT_SOURCE_DIR}/**/*.cc
+)
+
+add_executable( ${UNIT_TEST_BIN_NAME} 
+    main.cc
+    ${TESTS_SRC}
+)

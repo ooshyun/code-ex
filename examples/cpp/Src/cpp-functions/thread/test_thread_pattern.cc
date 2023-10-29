@@ -9,11 +9,12 @@
 #include <condition_variable>
 
 void producer(std::queue<std::string>* downloaded_pages, std::mutex* m,
-            int index){
-    for (int i=0; i<5; i++){
+            int index) {
+    for (int i = 0; i < 5; i++) {
         // Hypothesis: downloading each page takes different time
         std::this_thread::sleep_for(std::chrono::milliseconds(100*index));
-        std::string page = "Page " + std::to_string(i) + " from thread (" + std::to_string(index) + ")\n";
+        std::string page = "Page " + std::to_string(i) +
+                      " from thread (" + std::to_string(index) + ")\n";
 
         // data is sharaed between threads, so we need to lock it
         m->lock();
@@ -23,11 +24,11 @@ void producer(std::queue<std::string>* downloaded_pages, std::mutex* m,
 }
 
 void consumer(std::queue<std::string>* downloaded_pages, std::mutex* m,
-            int* num_processed){
-    while (*num_processed < 25){
+            int* num_processed) {
+    while (*num_processed < 25) {  // do until total 25 pages are processed
         m->lock();
 
-        if (downloaded_pages->empty()){
+        if (downloaded_pages->empty()) {
             m->unlock();
 
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -47,27 +48,28 @@ void consumer(std::queue<std::string>* downloaded_pages, std::mutex* m,
 
 }
 
-void _test_thread_pattern(void){
+void _test_thread_pattern(void) {
     std::queue<std::string> downloaded_pages;
     std::mutex m;
 
     std::vector<std::thread> producers;
-    for (int i=0; i<5; i++){
+    for (int i = 0; i < 5; i++) {
         producers.push_back(std::thread(producer, &downloaded_pages, &m, i+1));
     }
 
     int num_processed = 0;
 
     std::vector<std::thread> consumers;
-    for (int i=0; i<5; i++){
-        consumers.push_back(std::thread(consumer, &downloaded_pages, &m, &num_processed));
+    for (int i = 0; i < 5; i++) {
+        consumers.push_back(std::thread(consumer, &downloaded_pages,
+                                        &m, &num_processed));
     }
 
-    for (int i=0; i<5; i++){
+    for (int i = 0; i < 5; i++) {
         producers[i].join();
     }
 
-    for (int i=0; i<5; i++){
+    for (int i = 0; i < 5; i++) {
         consumers[i].join();
     }
 }
@@ -97,6 +99,7 @@ void consumer_cv(std::queue<std::string>* downloaded_pages, std::mutex* m,
   while (*num_processed < 25) {
     std::unique_lock<std::mutex> lk(*m);
 
+    // [&] means capture local area
     cv->wait(
         lk, [&] { return !downloaded_pages->empty() || *num_processed == 25; });
 
@@ -150,7 +153,7 @@ void _test_thread_pattern_condition_var(void) {
 }
 
 
-void test_thread_pattern(void){
+void test_thread_pattern(void) {
     printf("  test_thread_pattern\n");
     // _test_thread_pattern();
 

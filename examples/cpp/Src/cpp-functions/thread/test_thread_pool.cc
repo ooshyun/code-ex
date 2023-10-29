@@ -1,5 +1,6 @@
-// https://modoocode.com/285
-
+/*
+  Copyright from https://modoocode.com/285
+*/
 #include <chrono>
 #include <condition_variable>
 #include <cstdio>
@@ -82,8 +83,10 @@ std::future<typename std::result_of<F(Args...)>::type> ThreadPool::EnqueueJob(
   }
 
   using return_type = typename std::result_of<F(Args...)>::type;
+  // make promise / packaged_task
   auto job = std::make_shared<std::packaged_task<return_type()>>(
     std::bind(std::forward<F>(f), std::forward<Args>(args)...));
+  // make thread
   std::future<return_type> job_result_future = job->get_future();
   {
     std::lock_guard<std::mutex> lock(m_job_q_);

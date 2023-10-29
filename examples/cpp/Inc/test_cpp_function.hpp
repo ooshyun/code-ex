@@ -1,5 +1,5 @@
-#ifndef TEST_CPP_FUNCTIONS_H
-#define TEST_CPP_FUNCTIONS_H
+#ifndef TEST_CPP_FUNCTIONS_HPP
+#define TEST_CPP_FUNCTIONS_HPP
 
 void test_smart_pointer(void);
 void testClassAddress(void);
@@ -14,20 +14,14 @@ void test_end_func_const(void);
 void test_ref(void);
 void test_thread(void);
 void test_thread_pattern(void);
+
+// thread/test_atomic.cc
 void test_atomic(void);
-void test_memory_order_relaxed(void);
-void test_atomic_memory_order_relaxed(void);
-void test_atomic_rel_ack(void);
-void test_atomic_rel_ack_sequence(void);
-void test_atomic_seq_cst_sequence(void);
-void test_promise_future_scratch(void);
-void test_promise_future(void);
-void test_wait_for(void);
-void test_shared_future(void);
-void test_packaged_task(void);
-void test_async(void);
-void test_sync_vs_async_sync(void);
-void test_sync_vs_async_async(void);
+
+// thread/test_sync_and_async.cc
+void test_sync_and_async(void);
+
+// thread/test_thread_pool.cc
 int test_thread_pool(void);
 
 void test_copy_elision(void);
@@ -58,6 +52,9 @@ void test_transfer_lambda(void);
 void test_func_ptr(void);
 void test_share_ptr_lambda(void);
 
+// function/test_function_argument.cc
+void test_function_argument(void);
+
 
 // test_uniform_init.cc
 void test_uniform_init(void);
@@ -83,4 +80,11 @@ void test_exec(void);
 
 // test_string.cc
 void test_string(void);
-#endif
+
+// test_rtti.cc
+void test_rtti(void);
+
+// test_exception.cc
+void test_exception(void);
+
+#endif  // PRACTICE_EXAMPLES_CPP_INC_TEST_CPP_FUNCTION_HPP_

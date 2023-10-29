@@ -36,5 +36,4 @@ public:
     void getchild(treeNode* leftNode, treeNode* rightNode);
 };
 
-void testGraph();
 #endif
