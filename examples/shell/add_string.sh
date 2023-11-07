@@ -23,6 +23,21 @@ echo "add '$a' + '$b' "
 command_string="$a$b"
 run_command $command_string
 
+
+a+=$b
+echo "added $a"
+
+
+x="abc \
+def"
+echo "nextline test $x"
+
+function test_nextline_in_func() {
+    y="xyz \
+abc"
+    echo "nextline test $y"
+}
+test_nextline_in_func
 # # Method 1
 # # Print the command to verify it
 # echo "Executing command: $command_string"

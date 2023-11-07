@@ -18,7 +18,7 @@ raise_error() {
     echo "Error!"
     set -e
 }
-ls -l temp_$RANDOM || raise_error
+ls -l temp_$RANDOM || raise_error  # Use || &&
 # ls -l temp_$RANDOM # it raise error
 
 error_func_2() {
