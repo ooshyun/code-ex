@@ -11,6 +11,9 @@ void test_define_func(void);
 // test_switch_func.c
 void test_switch_func(void);
 
+// test_condition.c
+void test_condition(void);
+
 }
 
 

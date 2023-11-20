@@ -27,8 +27,10 @@ int test_thread_pool(void);
 void test_copy_elision(void);
 void test_rvalue(void);
 void test_rvalue_simple(void);
-void test_type_cast(void);
 void test_template();
+
+// test_type.cc
+void test_type(void);
 
 // function/test_function.cc
 void test_callable(void);
@@ -86,5 +88,8 @@ void test_rtti(void);
 
 // test_exception.cc
 void test_exception(void);
+
+// test_type_traits.cc
+void test_type_traits(void);
 
 #endif  // PRACTICE_EXAMPLES_CPP_INC_TEST_CPP_FUNCTION_HPP_

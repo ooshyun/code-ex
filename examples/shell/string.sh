@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 set -e
 
 # Method 2
@@ -57,4 +57,8 @@ cat ./test.log
 rm -rf ./test.log
 
 
+string_sub="abcdefg"
+echo "string_sub: $string_sub"
+echo "string_sub[0:3]: ${string_sub:0:3}"
+echo "string_sub[0:3]: ${string_sub:0:-2}"
 

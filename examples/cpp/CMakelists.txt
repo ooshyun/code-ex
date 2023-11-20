@@ -73,7 +73,7 @@ if(NOT curl_FOUND)
   if (x86_64_LIB)
     set(libcurl ${ROOT_LIB}/curl/lib/libcurl.a)
   else()
-    set(libcurl ${ROOT_LIB}/curl/8.3.0/lib/libcurl.a)
+    set(libcurl ${ROOT_LIB}/curl/8.4.0/lib/libcurl.a)
   endif()
 endif()
 
@@ -134,7 +134,7 @@ else()
     ${ROOT_LIB}/boost/1.82.0_1/include
     ${ROOT_LIB}/nlohmann-json/3.11.2/include
     ${ROOT_LIB}/spdlog/1.12.0/include
-    ${ROOT_LIB}/curl/8.3.0/include
+    ${ROOT_LIB}/curl/8.4.0/include
     ${ROOT_LIB}/fmt/10.1.1/include # dependency of spdlog
   )
 endif()

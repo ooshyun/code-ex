@@ -88,7 +88,6 @@ int main(void) {
   // testDateTime();
   // testMemAllocate();
   // testRand();
-  // test_typedef();
   // test_end_func_const();
   // test_ref();
 
@@ -101,7 +100,6 @@ int main(void) {
   // test_copy_elision();
   // test_rvalue_simple();
   // test_rvalue();
-  // test_type_cast();
   // test_template();
 
   /* function/test_labmda.cc */
@@ -136,7 +134,7 @@ int main(void) {
   // test_share_ptr_lambda();
 
   /* function/test_function_argument.cc */
-  test_function_argument();
+  // test_function_argument();
 
   /* test_unifomr_init.cc */
   // test_uniform_init();
@@ -167,6 +165,12 @@ int main(void) {
 
   /* test_exception.cc */
   // test_exception();
+
+  /* test_type.cc */
+  test_type();
+
+  /* test_type_traits.cc */
+  // test_type_traits();
 #endif
 
 #ifdef TEST_C_FUNCTION
@@ -179,6 +183,9 @@ int main(void) {
 
   /* test_switch_func */
   // test_switch_func();
+
+  /* test_condition */
+  // test_condition();
 #endif
 
 #ifdef TEST_DESIGN_PATTERN
@@ -214,6 +221,7 @@ int main(void) {
 #ifdef TEST_BOOST
     // test_xml_parse();
     // test_xml_parse_complicate();
+    // test_xml_parse_api();
 #endif
 
   return 0;

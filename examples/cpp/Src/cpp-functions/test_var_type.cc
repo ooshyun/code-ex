@@ -1,5 +1,22 @@
 #include <iostream>
 
+class TestVarType {
+ public:
+    TestVarType() {
+        std::cout << "TestVarType" << std::endl;
+        std::cout << a << " and " << b << std::endl;
+    }
+    ~TestVarType() {
+        std::cout << "~TestVarType" << std::endl;
+    }
+ private:
+    static const int a = 1;
+    const int b = 2;
+};
+
+static const int a = 1;
+const int b = 2;
+
 void test_const_func2(void *buffer) {
     std::cout << "test_const_func2" << std::endl;
 }
@@ -15,4 +32,6 @@ void test_const(void) {
         buf[i] = i;
     }
     test_const_func(buf);
+
+    TestVarType t;
 }
