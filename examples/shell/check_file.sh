@@ -21,6 +21,12 @@ else
     echo "$FILE folder does not exist."
 fi
 
+if [ ! -d "$FILE"  ]; then
+    echo "$FILE folder does not exist."
+else 
+    echo "$FILE folder exists."
+fi
+
 FILE+="a"
 if [ -d "$FILE" ]; then
     echo "$FILE folder exists."

@@ -34,4 +34,10 @@ void test_const(void) {
     test_const_func(buf);
 
     TestVarType t;
+
+    const int out_forloop = 10;
+    for (int i = 0; i < 2; i++) {
+        const int out_forloop = 30;
+        std::cout << out_forloop << std::endl;
+    }
 }

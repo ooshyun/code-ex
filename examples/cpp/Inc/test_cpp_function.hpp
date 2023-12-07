@@ -86,6 +86,9 @@ void test_string(void);
 // test_rtti.cc
 void test_rtti(void);
 
+// test_rtti.cc
+void test_myarray(void);
+
 // test_exception.cc
 void test_exception(void);
 

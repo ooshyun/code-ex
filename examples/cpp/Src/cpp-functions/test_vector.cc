@@ -61,6 +61,37 @@ void _test_vector_init() {
     std::cout << "vector size: " << samples.size() << std::endl;
 }
 
+void test_vector_function() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+
+    std::cout << "vec size: " << vec.size() << std::endl;
+    std::cout << "vec capacity: " << vec.capacity() << std::endl;
+    std::cout << "vec max_size: " << vec.max_size() << std::endl;
+    std::cout << "vec empty: " << vec.empty() << std::endl;
+    std::cout << "vec front: " << vec.front() << std::endl;
+    std::cout << "vec back: " << vec.back() << std::endl;
+    std::cout << "vec data: " << vec.data() << std::endl;
+    std::cout << "vec at: " << vec.at(2) << std::endl;
+    std::cout << "vec operator[]: " << vec[2] << std::endl;
+    std::cout << "vec begin: " << *vec.begin() << std::endl;
+    std::cout << "vec end: " << *(vec.end()-1) << std::endl;
+    std::cout << "vec rbegin: " << *vec.rbegin() << std::endl;
+    std::cout << "vec rend: " << *(vec.rend()-1) << std::endl;
+
+    for (auto it = vec.begin(); it != vec.end(); ) {
+        std::cout << *it << " ";
+        if (*it == 3) {
+            it = vec.erase(it);
+        } else {
+            it++;
+        }
+    }
+    for (auto& v : vec) {
+        std::cout << v << " ";
+    }
+    std::cout << std::endl;
+}
+
 void test_vector() {
     // std::cout << "test_vector_reference" << std::endl;
     // std::vector<std::string> project_paths = {
@@ -69,6 +100,5 @@ void test_vector() {
     // _test_vector_reference(project_paths);
     // _test_vector_assign();
     _test_vector_init();
-    // _test_vector_assign();
-    _test_vector_init();
+    test_vector_function();
 }
