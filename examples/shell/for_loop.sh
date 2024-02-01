@@ -29,3 +29,9 @@ done
 for (( i=0; i<${#PLANETS[@]}; i++ )); do
     echo "Planet #$i is ${PLANETS[i]}"
 done
+
+supported_python_versions=( "6" "7" "8" )
+for python_version in ${supported_python_versions[@]}
+do
+    echo "Building Python package for Python $python_version"
+done

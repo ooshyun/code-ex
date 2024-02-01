@@ -39,3 +39,12 @@ greet
 var_global="local"
 
 greet
+
+
+function get_command_result() {
+    echo "$@" > output.txt
+}
+path="/"
+echo "hello?"
+get_command_result $(ls -al $path)
+echo "done"

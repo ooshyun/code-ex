@@ -52,6 +52,12 @@ else
     echo "test_str is not abc"
 fi
 
+
+if [ $test_str != "abc" ]
+then
+    echo "test_str is not abc"
+fi
+
 function iftest() {
     if [ -z "$1" ]; then
         echo "No argument supplied"
@@ -64,8 +70,45 @@ function iftest() {
             echo "First argument is hello"
         fi
     fi
+
+    echo "empty argument test"
+
+    if [ ! -z $1 ] && [ $1 -eq 0 ]; then
+        echo "First argument is 0"
+    fi
+    
+    echo "end of empty argument test"
+   
 }
 
+set -e
 iftest
 iftest 0
 iftest hello
+
+echo "Finshed"
+
+
+# Define the list as an array
+list=("apple" "banana" "cherry")
+
+# The variable to check
+item="bananaa"
+
+# Flag to indicate if the item was found
+found=false
+
+# Loop through the array
+for i in "${list[@]}"; do
+  if [[ "$i" == "$item" ]]; then
+    found=true
+    break
+  fi
+done
+
+# Check if the item was found
+if [ "${found}" = true ]; then
+  echo "$item is in the list."
+else
+  echo "$item is not in the list."
+fi

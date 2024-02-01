@@ -1,7 +1,7 @@
 #!bin/bash
 
-ipaddr=cochl.iptime.org
-port=5353
+ipaddr=host.iptime.org
+port=12345
 ping -q -c 1 -w 15 $ipaddr >/dev/null 2>/dev/null
 pingres=$?
 
@@ -16,3 +16,15 @@ nmap_cmd="nmap -p $port $ipaddr | awk"
 echo $nmap_cmd
 nmapres=$($nmap_cmd)
 echo $nmapres
+
+
+
+version=$(python3.7 --version)
+
+echo $version
+
+if [ "$version" != "" ]; then
+    echo "python 3.6 version is installed."
+else
+    echo "python is not installed."
+fi
