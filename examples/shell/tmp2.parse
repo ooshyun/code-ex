@@ -1,0 +1,9 @@
+cochlsense_demo benchmark 881564 
+objectanalytics benchmark 881568 
+vmd benchmark 881584 
+cochlsense_demo cpu 881591
+cochlsense_demo mem 881592
+objectanalytics cpu 881606
+objectanalytics mem 881607
+vmd cpu 881616
+vmd mem 881617

@@ -1,9 +1,9 @@
 # set(CMAKE_OSX_ARCHITECTURES x86_64)
-# set(CMAKE_OSX_ARCHITECTURES arm64)
+set(CMAKE_OSX_ARCHITECTURES arm64)
 
 # set(CMAKE_CXX_COMPILER /opt/homebrew/opt/llvm/bin/clang++)
-# set(CMAKE_CXX_COMPILER /usr/bin/clang++)
-set(CMAKE_CXX_COMPILER /usr/bin/g++)
+set(CMAKE_CXX_COMPILER /usr/bin/clang++)
+# set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
 # SET(CMAKE_C_COMPILER "/usr/bin/aarch64-linux-gnu-gcc")
 # set(CMAKE_CXX_COMPILER "/usr/bin/aarch64-linux-gnu-g++")

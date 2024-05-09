@@ -40,6 +40,7 @@
 // Practice C++ Functions
 #define TEST_CPP_FUNCTION
 #define TEST_BOOST
+#define TEST_SPDLOG
 
 // Practice Design Pattern
 // #define TEST_DESIGN_PATTERN
@@ -73,6 +74,10 @@
 #include "../Inc/boost.hpp"
 #endif
 
+#ifdef TEST_SPDLOG
+#include "../Inc/spdlog_scratch.hpp"
+#endif
+
 int main(void) {
   practice::log_init(0);
   LOG_DEBUG("Start main function ");
@@ -94,7 +99,7 @@ int main(void) {
 #endif
 
 #ifdef TEST_CPP_FUNCTION
-  // test_smart_pointer();
+  test_smart_pointer();
   // testClassAddress();
   // testChrono();
   // testDataStructure();
@@ -185,7 +190,7 @@ int main(void) {
 
   /* test_rtti.cc */
   // test_rtti();
-  test_myarray();
+  // test_myarray();
 
   /* test_exception.cc */
   // test_exception();
@@ -195,6 +200,12 @@ int main(void) {
 
   /* test_type_traits.cc */
   // test_type_traits();
+
+  /* test_bellman_ford.cc */
+  // test_bellmanford();
+
+  /* test_dijkstra*/
+  // test_dijkstra();
 #endif
 
 #ifdef TEST_C_FUNCTION
@@ -246,6 +257,10 @@ int main(void) {
     // test_xml_parse();
     // test_xml_parse_complicate();
     // test_xml_parse_api();
+#endif
+
+#ifdef TEST_SPDLOG
+    // test_spdlog_scratch();
 #endif
 
   return 0;

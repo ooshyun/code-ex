@@ -94,3 +94,12 @@ echo "Original command: $cmd"
 # Remove -L/opt/axis/acapsdk/sysroots/aarch64/usr/lib argument
 modified_cmd=$(remove_argument "$cmd" "-L/opt/axis/acapsdk/sysroots/aarch64/usr/lib")
 echo "Command after removal: $modified_cmd"
+
+exit_return() {
+    echo "Exiting with return code 2"
+    exit 2
+}
+
+exit_return
+
+exit 0

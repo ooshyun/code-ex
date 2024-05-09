@@ -91,13 +91,24 @@ void test_smart_pointer(void) {
       std::cout << "test_ptr is not nullptr" << std::endl;
     }
 
-    // test_ptr = std::make_unique<TestPassSmartPointer>();    
+    test_ptr = std::make_unique<TestPassSmartPointer>();    
     // if (test_ptr->get_smart_ptr()) {
     //   std::cout << "test_ptr->get_smart_ptr() is not nullptr" << std::endl;
     // } else {
     //   std::cout << "test_ptr->get_smart_ptr() is nullptr" << std::endl;
     // }
-    if (test_ptr) test_ptr.reset();
+    
+    if (test_ptr) {
+      std::cout << "test_ptr is not nullptr" << std::endl;
+      test_ptr.reset();
+    }
+
+    if (test_ptr) {
+      std::cout << "test_ptr is not nullptr" << std::endl;
+    } else {
+      std::cout << "test_ptr is nullptr" << std::endl;
+    }
+    test_ptr.reset();
 
 
     /* Get Smart pointer in other class 

@@ -40,3 +40,21 @@ echo $buf
 buf=("a" "b")
 
 echo $buf
+
+
+# Simulate nested arrays using strings
+# Each 'array' is a space-separated string
+nested_array="a1 a2 a3:b1 b2 b3:c1 c2 c3"
+
+# Outer loop to iterate over the 'outer' array (the string representing nested arrays)
+IFS=':' # Internal Field Separator for the outer array
+set -f  # Disable glob expansion to safely handle *
+for outer_element in $nested_array; do
+    
+    # Inner loop to iterate over the 'inner' array (elements within each nested array)
+    IFS=' ' # Internal Field Separator for the inner array
+    for inner_element in $outer_element; do
+        echo "$inner_element"
+    done
+done
+set +f  # Re-enable glob expansion

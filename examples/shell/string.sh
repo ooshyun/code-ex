@@ -60,7 +60,7 @@ rm -rf ./test.log
 string_sub="abcdefg"
 echo "string_sub: $string_sub"
 echo "string_sub[0:3]: ${string_sub:0:3}"
-echo "string_sub[0:3]: ${string_sub:0:-2}"
+echo "string_sub[0:-2]: ${string_sub:0:-2}"
 
 
 
@@ -73,3 +73,18 @@ test="abcd \
       efgh"
 
 echo "test: $test" 
+
+
+
+x="abc"
+y="${x%?}"
+z="${x:0:-2}"
+echo "x: $x"
+echo "y: $y"
+echo "z: $z"
+
+
+x_list=("a" "b" "c" "d")
+echo "x_list: ${x_list[@]}"
+x_list_string="${x_list[@]}"
+echo "x_list_string: $x_list_string"

@@ -25,3 +25,6 @@
 [submodule "examples/cpp/third_party/googletest"]
 	path = examples/cpp/third_party/googletest
 	url = git@github.com:google/googletest.git
+[submodule "examples/cpp/third_party/easy_profiler"]
+	path = examples/cpp/third_party/easy_profiler
+	url = https://github.com/yse/easy_profiler

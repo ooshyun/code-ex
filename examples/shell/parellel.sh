@@ -15,7 +15,11 @@ task2() {
 
 # Execute functions in parallel
 task1 &
+task1_pid=$!
 task2 &
+task2_pid=$!
+
+echo $(printf 'task1_pid: %s \n task2_pid: %s' "$task1_pid" "$task2_pid")
 
 # Wait for both tasks to finish
 wait
