@@ -18,6 +18,7 @@ spdlog::level::level_enum log_level_from_int(int level) {
 }
 
 int log_init(int log_level) {
+  std::cout << "Call log_init function \n";
   try {
     const std::string default_logger = "oohyun";
     if (!spdlog::get(default_logger)) {

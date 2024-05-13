@@ -30,6 +30,7 @@
 
 #include <iostream>  // std::cout
 #include "../Inc/log.hpp"
+#include "../Inc/easy_profiler.hpp"
 
 // Practice Data Structures in HackerRank Youtube
 #define TEST_ALGORITHM_PRACTICE
@@ -80,7 +81,9 @@
 
 int main(void) {
   practice::log_init(0);
-  LOG_DEBUG("Start main function ");
+  easy_profiler_init();
+
+  LOG_INFO("Start main function ");
 #ifdef TEST_ALGORITHM_PRACTICE
   // 1. Practice Data Structures in HackerRank Youtube
   // testBalancedParenthesesinExpression();
@@ -242,6 +245,7 @@ int main(void) {
 
 
 #ifdef TEST_LIBRARY
+    test_easy_profiler();
     // test_time();
     // test_chronos_time();
     // test_temp_file();
@@ -263,5 +267,6 @@ int main(void) {
     // test_spdlog_scratch();
 #endif
 
+  easy_profiler_finish();
   return 0;
 }
