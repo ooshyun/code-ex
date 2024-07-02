@@ -4,8 +4,8 @@
 # # add third party, spdlog
 # include(${CMAKE_SOURCE_DIR}/third_party/spdlog.cmake)
 
-# easy_profiler
-include(${CMAKE_SOURCE_DIR}/examples/cpp/third_party/easy_profiler.cmake)
+# # easy_profiler
+# include(${CMAKE_SOURCE_DIR}/examples/cpp/third_party/easy_profiler.cmake)
 
 # Aggregate the sources
 file(GLOB SRC_FILES
@@ -25,7 +25,7 @@ file(GLOB SRC_FILES
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/utils/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/curl/*.cc"
-     "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/easy_profiler/*.cc"
+    #  "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/easy_profiler/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/std/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/std/chronos/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/std/filesystem/*.cc"
@@ -135,7 +135,7 @@ if (x86_64_LIB)
     ${ROOT_LIB}/spdlog/include
     ${ROOT_LIB}/curl/include
     ${ROOT_LIB}/fmt/include # dependency of spdlog
-    ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/easy_profiler/easy_profiler_core/include
+    # ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/easy_profiler/easy_profiler_core/include
     )
 else()
   target_include_directories(ccex
@@ -146,7 +146,7 @@ else()
     ${ROOT_LIB}/spdlog/1.13.0/include
     ${ROOT_LIB}/curl/8.7.1/include
     ${ROOT_LIB}/fmt/10.2.1_1/include # dependency of spdlog
-    ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/easy_profiler/easy_profiler_core/include
+    # ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/easy_profiler/easy_profiler_core/include
   )
 endif()
 
@@ -159,9 +159,9 @@ PUBLIC
   ${libcrypto}
   ${libssl}
   ${libfmt}
-  easy_profiler
+  # easy_profiler
 )
-add_dependencies(ccex libeasy_profiler)
+# add_dependencies(ccex libeasy_profiler)
 add_executable(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/Src/main.cc")
 
 target_compile_options(${PROJECT_NAME}
@@ -177,16 +177,16 @@ PRIVATE
   # -masm=intel          # use Intel syntax for assembly output
 )
 
-target_include_directories(${PROJECT_NAME}
-PUBLIC
-  ${CMAKE_CURRENT_SOURCE_DIR}/Inc
-  ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/easy_profiler/easy_profiler_core/include
-)
+# target_include_directories(${PROJECT_NAME}
+# PUBLIC
+#   ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+#   ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/easy_profiler/easy_profiler_core/include
+# )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ccex)
 
 # if without easy_profiler, add below
-target_compile_definitions(ccex PRIVATE BUILD_WITH_EASY_PROFILER)
+# target_compile_definitions(ccex PRIVATE BUILD_WITH_EASY_PROFILER)
 # target_compile_definitions(ccex PRIVATE DISABLE_EASY_PROFILER)
 
 

@@ -81,7 +81,7 @@
 
 int main(void) {
   practice::log_init(0);
-  easy_profiler_init();
+  // easy_profiler_init();
 
   LOG_INFO("Start main function ");
 #ifdef TEST_ALGORITHM_PRACTICE
@@ -102,14 +102,14 @@ int main(void) {
 #endif
 
 #ifdef TEST_CPP_FUNCTION
-  test_smart_pointer();
+  // test_smart_pointer();
   // testClassAddress();
   // testChrono();
   // testDataStructure();
   // testDateTime();
   // testMemAllocate();
   // testRand();
-  // test_vector();
+  test_vector();
   // test_typedef();
   // test_end_func_const();
   // test_ref();
@@ -207,8 +207,14 @@ int main(void) {
   /* test_bellman_ford.cc */
   // test_bellmanford();
 
-  /* test_dijkstra*/
+  /* test_dijkstra */
   // test_dijkstra();
+
+  /* test_class */
+  // test_static_component_in_class();
+
+  /* test_filesystem */
+  test_filesystem();
 #endif
 
 #ifdef TEST_C_FUNCTION
@@ -245,7 +251,7 @@ int main(void) {
 
 
 #ifdef TEST_LIBRARY
-    test_easy_profiler();
+    // test_easy_profiler();
     // test_time();
     // test_chronos_time();
     // test_temp_file();
@@ -267,6 +273,6 @@ int main(void) {
     // test_spdlog_scratch();
 #endif
 
-  easy_profiler_finish();
+  // easy_profiler_finish();
   return 0;
 }

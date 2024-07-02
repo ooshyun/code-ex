@@ -92,6 +92,25 @@ void test_vector_function() {
     std::cout << std::endl;
 }
 
+void test_vector_typecast() {
+    // float to uint8_t
+    std::vector<float> float_vec = {1.0, 2.0, 3.0, 4.0, 5.0};
+    std::vector<uint8_t> uint8_vec;
+    uint8_vec.reserve(float_vec.size());
+    uint8_t zero_point = 255;
+    float scale = 0.333999;
+    for (auto& f : float_vec) {
+        std::cout << std::to_string(f) << " to "
+                  << std::to_string(static_cast<uint8_t>(f/scale + zero_point))
+                  << std::endl;
+        uint8_vec.push_back(static_cast<uint8_t>(f/scale + zero_point));
+    }
+
+    for (auto& u : uint8_vec) {
+        std::cout << std::to_string(u) << "\n";
+    }
+}
+
 void test_vector() {
     // std::cout << "test_vector_reference" << std::endl;
     // std::vector<std::string> project_paths = {
@@ -99,6 +118,7 @@ void test_vector() {
     //                  "practice/Src/test/test_vector_reference2.cc"};
     // _test_vector_reference(project_paths);
     // _test_vector_assign();
-    _test_vector_init();
-    test_vector_function();
+    // _test_vector_init();
+    // test_vector_function();
+    test_vector_typecast();
 }

@@ -95,4 +95,10 @@ void test_exception(void);
 // test_type_traits.cc
 void test_type_traits(void);
 
+// test_class.cc
+void test_static_component_in_class(void);
+
+// test_filesystem.cc
+void test_filesystem(void);
+
 #endif  // PRACTICE_EXAMPLES_CPP_INC_TEST_CPP_FUNCTION_HPP_
