@@ -97,6 +97,7 @@ void test_type_traits(void);
 
 // test_class.cc
 void test_static_component_in_class(void);
+void test_template_class(void);
 
 // test_filesystem.cc
 void test_filesystem(void);
