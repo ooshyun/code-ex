@@ -25,8 +25,10 @@
 // Test vector for data structure
 //     1. test vector of each problem
 //         build **.cc files using shell file and CMakelists.txt
-//     2. test memory leakage
+//     2. test memory leakage (macos)
 //         leaks --atExit --list -- *.exe
+//     2.1 test memory leakage (linux)
+//       valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt *.exe 2>&1 | tee valgrind-out.txt
 
 #include <iostream>  // std::cout
 #include "../Inc/log.hpp"
@@ -212,6 +214,7 @@ int main(void) {
 
   /* test_class */
   // test_static_component_in_class();
+  test_template_class();
 
   /* test_filesystem */
   // test_filesystem();

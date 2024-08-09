@@ -1,8 +1,8 @@
 # TODO(oohyun): TBD, compile all of third party libraries
 # Currently it is for macOS arm64/x86_64
 
-# # add third party, spdlog
-# include(${CMAKE_SOURCE_DIR}/third_party/spdlog.cmake)
+# add third party, spdlog
+include(${CMAKE_SOURCE_DIR}/examples/cpp/third_party/spdlog.cmake)
 
 # # easy_profiler
 # include(${CMAKE_SOURCE_DIR}/examples/cpp/third_party/easy_profiler.cmake)
@@ -28,7 +28,7 @@ file(GLOB SRC_FILES
     #  "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/easy_profiler/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/std/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/std/chronos/*.cc"
-     "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/std/filesystem/*.cc"
+    #  "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/std/filesystem/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/boost/property_tree/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/spdlog/*.cc"
      )
@@ -42,11 +42,15 @@ foreach(SRC ${SOURCES})
 endforeach()
 message("-----------")
 
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  message("Linux build")
+else()
 if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
   set(ROOT_LIB "/opt/homebrew/Cellar/")
 else()
   set(ROOT_LIB "/usr/local/opt/")
   set(x86_64_LIB ON)
+endif()
 endif()
 
 message("ROOT_LIB ${ROOT_LIB}")
@@ -54,6 +58,10 @@ message("ROOT_LIB ${ROOT_LIB}")
 # installation: brew
 find_package(fmt REQUIRED)
 
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+find_package(Boost 1.65.1 REQUIRED COMPONENTS system chrono thread filesystem atomic)
+
+else()
 find_package(boost)
 if(NOT boost_FOUND)
   message("boost not found")
@@ -112,6 +120,8 @@ else()
   set (libfmt ${ROOT_LIB}/fmt/10.2.1_1/lib/libfmt.a)
 endif()
 
+endif()  # (CMAKE_SYSTEM_NAME MATCHES "Linux")
+
 add_library(ccex ${SOURCES})
 target_compile_options(ccex 
 PRIVATE
@@ -126,6 +136,33 @@ PRIVATE
   # -masm=intel          # use Intel syntax for assembly output
 )
 
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  target_include_directories(ccex
+  PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+    ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/tensorflow
+    ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/flatbuffers/include
+    ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/spdlog/include
+    ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/jwt-cpp/include
+    ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/curl/include
+    ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/openssl/include
+    ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/json/single_include
+    ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/fmt/include
+    ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/boost/include
+    # ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/easy_profiler/easy_profiler_core/include
+  )  
+  link_directories(${CMAKE_BINARY_DIR}/third_party/)
+  target_link_libraries(ccex
+  PUBLIC
+    ${libboost}
+    # ${libcurl}
+    ${libspdlog}
+    # ${libcrypto}
+    # ${libssl}
+    ${libfmt}
+    # easy_profiler
+  )
+else()
 if (x86_64_LIB)
   target_include_directories(ccex
   PUBLIC
@@ -161,6 +198,8 @@ PUBLIC
   ${libfmt}
   # easy_profiler
 )
+endif()
+
 # add_dependencies(ccex libeasy_profiler)
 add_executable(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/Src/main.cc")
 

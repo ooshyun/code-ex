@@ -3,8 +3,8 @@ set(CMAKE_OSX_ARCHITECTURES arm64)
 
 set(CMAKE_C_COMPILER /usr/bin/clang)
 # set(CMAKE_CXX_COMPILER /opt/homebrew/opt/llvm/bin/clang++)
-set(CMAKE_CXX_COMPILER /usr/bin/clang++)
-# set(CMAKE_CXX_COMPILER /usr/bin/g++)
+# set(CMAKE_CXX_COMPILER /usr/bin/clang++)
+set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
 # SET(CMAKE_C_COMPILER "/usr/bin/aarch64-linux-gnu-gcc")
 # set(CMAKE_CXX_COMPILER "/usr/bin/aarch64-linux-gnu-g++")
@@ -14,7 +14,7 @@ set(CMAKE_CXX_COMPILER /usr/bin/clang++)
 # set(CROSS_PREFIX "aarch64-linux-gnu")
 # set(CROSS_PREFIX "arm-linux-gnueabihf")
 
-# set(CMAKE_SYSTEM_NAME "Linux")
+set(CMAKE_SYSTEM_NAME "Linux")
 
 set(CMAKE_SYSTEM_PROCESSOR "arm64")
 # set(CMAKE_SYSTEM_PROCESSOR "x86_64")

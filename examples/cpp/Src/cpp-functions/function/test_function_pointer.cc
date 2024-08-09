@@ -1,4 +1,5 @@
 
+#include <memory>
 #include <iostream>
 #include <functional>
 
@@ -26,16 +27,17 @@ void test_func_ptr(void) {
     func5(3, 5);
 }
 
-std::function<int(void)> f(std::shared_ptr<int> x) {
-    return [&]() { return *x; };
+std::function<int(void)> f(
+  std::shared_ptr<int> x) {
+  return [&]() { return *x; };
 }
 
 void test_share_ptr_lambda(void) {
-    std::function<int(void)> foo(nullptr);
-    {
-        std::shared_ptr<int> x(std::make_shared<int>(1));
-        foo = f(x);
-        std::cout << "shared ptr scope in " << foo() << std::endl;
-    }
-    std::cout << "shared ptr scope out " << foo() << std::endl;
+  std::function<int(void)> foo(nullptr);
+  {
+    std::shared_ptr<int> x(std::make_shared<int>(1));
+    foo = f(x);
+    std::cout << "shared ptr scope in " << foo() << std::endl;
+  }
+  std::cout << "shared ptr scope out " << foo() << std::endl;
 }

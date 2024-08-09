@@ -27,19 +27,29 @@ void test_filesystem(void) {
     // if (fcntl(fd, F_ADD_SEALS, F_SEAL_SHRINK | F_SEAL_GROW) == -1)
     //     error("fcntl(F_ADD_SEALS, F_SEAL_SHRINK | F_SEAL_GROW)");
 
-    // char *str1 = "One likes to believe in the freedom of music,\n";
-    // if (write(fd, str1, strlen(str1)) == -1)
-    //     error("write()");
+    char *str1 = "One likes to believe in the freedom of music,\n";
+    if (write(fd, str1, strlen(str1)) == -1) {
+        error("write()");
+    } else {
+        printf("write() success\n");
+    }
 
-    // char *str2 = "but glittering prizes and endless compromises shatter the illusion of integrity.";
-    // if (write(fd, str2, strlen(str2)) == -1)
-    //     error("write()");
+    char *str2 = "but glittering prizes and endless compromises shatter the illusion of integrity.";
+    if (write(fd, str2, strlen(str2)) == -1) {
+        error("write()");
+    } else {
+        printf("write() success\n");
+    }
 
+    // This part will raise error
     // if (fcntl(fd, F_ADD_SEALS, F_SEAL_WRITE) == -1)
     //     error("fcntl(F_ADD_SEALS, F_SEAL_WRITE)");
 
-    // if (write(fd, "This will fail!", 15) == -1)
+    // if (write(fd, "This will fail!", 15) == -1) {
     //     error("write()");
+    // } else {
+    //     printf("write() success\n");
+    // }
 
     // off_t r = lseek(fd, 0, 0);
     // if (r == -1)
