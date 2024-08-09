@@ -109,7 +109,7 @@ int main(void) {
   // testDateTime();
   // testMemAllocate();
   // testRand();
-  test_vector();
+  // test_vector();
   // test_typedef();
   // test_end_func_const();
   // test_ref();
@@ -126,7 +126,7 @@ int main(void) {
   // test_thread_pattern();
   // test_atomic();
   // test_sync_and_async();
-  // test_thread_pool();
+  test_thread_pool();
 
   // test_copy_elision();
   // test_rvalue_simple();
@@ -214,7 +214,7 @@ int main(void) {
   // test_static_component_in_class();
 
   /* test_filesystem */
-  test_filesystem();
+  // test_filesystem();
 #endif
 
 #ifdef TEST_C_FUNCTION

@@ -85,7 +85,8 @@ std::future<typename std::result_of<F(Args...)>::type> ThreadPool::EnqueueJob(
   using return_type = typename std::result_of<F(Args...)>::type;
   // make promise / packaged_task
   auto job = std::make_shared<std::packaged_task<return_type()>>(
-    std::bind(std::forward<F>(f), std::forward<Args>(args)...));
+    // std::bind(std::forward<F>(f), std::forward<Args>(args)...));
+    std::bind(f, std::forward<Args>(args)...));
   // make thread
   std::future<return_type> job_result_future = job->get_future();
   {
@@ -96,10 +97,43 @@ std::future<typename std::result_of<F(Args...)>::type> ThreadPool::EnqueueJob(
 
   return job_result_future;
 }
-
 }  // namespace ThreadPool
 
-// 사용 예시
+class BaseClassThreadPool {
+ public:
+  virtual ~BaseClassThreadPool() = default;
+  virtual int get_varable() = 0;
+  BaseClassThreadPool& operator=(BaseClassThreadPool&&) = default;
+  // BaseClassThreadPool(const BaseClassThreadPool&) = default;
+  int get_x_base() { return _x_base; }
+  int get_y_base() { return _y_base; }
+
+ protected:
+  BaseClassThreadPool(int x, int y) : _x_base(x), _y_base(y) {}
+  int _x_base;
+  int _y_base;
+
+ private:
+};
+
+class ParentClassThreadPool : public BaseClassThreadPool {
+ public:
+  ParentClassThreadPool(int x, int y):
+      BaseClassThreadPool(x, y) {
+    _x = x+y;
+    _y = x-y;
+    _ptr = std::make_unique<ParentClassThreadPool>(x+1, y+1);
+  }
+  ~ParentClassThreadPool() final = default;
+  int get_varable() final { return _x_base + _y_base; }
+  int get_x() { return _x; }
+  int get_y() { return _y; }
+ private:
+  int _x;
+  int _y;
+  std::unique_ptr<ParentClassThreadPool> _ptr;
+};
+
 int work(int t, int id) {
   printf("%d start \n", id);
   std::this_thread::sleep_for(std::chrono::seconds(t));
@@ -107,14 +141,95 @@ int work(int t, int id) {
   return t + id;
 }
 
-int test_thread_pool() {
-  ThreadPool::ThreadPool pool(3);
+std::vector<float> work_ptr(const std::unique_ptr<ParentClassThreadPool>& ptr) {
+// std::vector<float> work_ptr(const std::unique_ptr<ParentClassThreadPool>&& ptr) {
+  printf("work_ptr %p start \n", std::ref(ptr));
+  // std::this_thread::sleep_for(std::chrono::seconds(1));
+  std::vector<float> result;
+  result.push_back(static_cast<float>(ptr->get_x()));
+  result.push_back(static_cast<float>(ptr->get_y()));
+  result.push_back(static_cast<float>(ptr->get_varable()));
+  printf("work_ptr %p end \n", std::ref(ptr));
+  return result;
+}
 
-  std::vector<std::future<int>> futures;
+// static int call_time = 0;
+// void work_ptr() {
+//   printf("work_ptr! %d \n", call_time);
+//   call_time++;
+// }
+
+int test_thread_pool() {
+  ThreadPool::ThreadPool pool(8);
+
+  // printf("-- start test 1\n");
+
+  // // Test 1
+  // std::vector<std::future<int>> futures;
+  // for (int i = 0; i < 10; i++) {
+  //   futures.emplace_back(pool.EnqueueJob(work, i % 3 + 1, i));
+  // }
+  // for (auto& f : futures) {
+  //   printf("result : %d \n", f.get());
+  // }
+
+  printf("-- start test 2\n");
+
+  // Test 2-3 multi-thread
+  std::vector<std::future<std::vector<float>>> futures_ptr;
+  std::vector<std::unique_ptr<ParentClassThreadPool>> parent_ptrs;
   for (int i = 0; i < 10; i++) {
-    futures.emplace_back(pool.EnqueueJob(work, i % 3 + 1, i));
+    std::unique_ptr<ParentClassThreadPool> parent_ptr =
+        std::make_unique<ParentClassThreadPool>(i, i + 1);
+    parent_ptrs.push_back(std::move(parent_ptr));
   }
-  for (auto& f : futures) {
-    printf("result : %d \n", f.get());
+
+  // Test 2: unique_ptr
+  // OK
+  for (int i = 0; i < 10; i++) {
+    printf("%d - %p \n", i, std::ref(parent_ptrs[i]));
   }
+  // for (int i = 0; i < 10; i++) {
+  //   auto result = work_ptr(parent_ptrs[i]);
+  // }
+
+  for (int i = 0; i < 10; i++) {
+    futures_ptr.emplace_back(pool.EnqueueJob(
+        work_ptr, std::ref(parent_ptrs[i])));
+  }
+
+  printf("Get future!\n");
+  for (auto& f : futures_ptr) {
+    std::vector<float> result = f.get();
+    for (size_t j = 0; j < result.size(); j++) {
+      printf("%f \n", result[j]);
+    }
+  }
+
+  printf("--Finished test 2!\n");
+
+  // Test 3: async
+  std::vector<std::future<std::vector<float>>> v_async;
+
+  v_async.reserve(10);
+
+  for (size_t i = 0; i < 10; i++) {
+    v_async.emplace_back(std::async(
+        std::launch::async, work_ptr, std::ref(parent_ptrs[i])));
+        // std::launch::async, work_ptr, std::move(parent_ptrs[i])));
+  }
+
+  for (size_t i = 0; i < 10; i++)
+    v_async[i].wait();
+
+  printf("Get future!\n");
+  for (size_t i = 0; i < 10; i++) {
+    printf("result %d\n", i);
+    std::vector<float> result = v_async[i].get();
+    for (size_t j = 0; j < result.size(); j++) {
+      printf("%f \n", result[j]);
+    }
+  }
+
+  printf("--Finished test 3!\n");
 }
