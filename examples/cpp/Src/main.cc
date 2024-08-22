@@ -188,7 +188,7 @@ int main(void) {
   // test_exec();
 
   /* test_string.cc */
-  // test_string();
+  test_string();
 
   /* test_var_type.cc */
   // test_const();
@@ -214,7 +214,7 @@ int main(void) {
 
   /* test_class */
   // test_static_component_in_class();
-  test_template_class();
+  // test_template_class();
 
   /* test_filesystem */
   // test_filesystem();

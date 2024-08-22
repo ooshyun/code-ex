@@ -3,6 +3,7 @@
 #include "boost/filesystem/fstream.hpp"
 
 #include <iostream>
+#include <sstream>
 #include <string>
 
 enum TestEnum2String {
@@ -135,4 +136,12 @@ void test_string(void) {
   //     TestEnumClass2String::TestEnum2String0;
   // std::cout << "test_enumclass2string : " << test_enumclass2string
   //           << std::endl;
+
+
+  // string to float
+  float num_float;
+  std::string str_float = "3.14s";
+  std::istringstream str_iss(str_float);
+  str_iss >> num_float;
+  std::cout << "num_float : " << num_float << std::endl;
 }

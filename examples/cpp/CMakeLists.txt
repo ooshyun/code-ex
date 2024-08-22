@@ -43,35 +43,43 @@ endforeach()
 message("-----------")
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
-  message("Linux build")
+  message("Linux build with no Option")
 else()
 if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
   set(ROOT_LIB "/opt/homebrew/Cellar/")
 else()
-  set(ROOT_LIB "/usr/local/opt/")
+  # set(ROOT_LIB "/usr/local/opt/")
+  set(ROOT_LIB "/usr/lib/x86_64-linux-gnu/")
+  set(ROOT_HEADER "/usr/include/")
   set(x86_64_LIB ON)
 endif()
 endif()
 
-message("ROOT_LIB ${ROOT_LIB}")
+message("ROOT_LIB:" ${ROOT_LIB})
 
 # installation: brew
 find_package(fmt REQUIRED)
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
 find_package(Boost 1.65.1 REQUIRED COMPONENTS system chrono thread filesystem atomic)
-
+set (libboost
+  Boost::system
+  Boost::chrono
+  Boost::thread
+  Boost::filesystem
+  Boost::atomic
+)
 else()
 find_package(boost)
 if(NOT boost_FOUND)
   message("boost not found")
   if (x86_64_LIB)
     set(libboost
-      ${ROOT_LIB}/boost/lib/libboost_filesystem.a
-      ${ROOT_LIB}/boost/lib/libboost_system-mt.a
-      ${ROOT_LIB}/boost/lib/libboost_thread-mt.a
-      ${ROOT_LIB}/boost/lib/libboost_chrono.a
-      ${ROOT_LIB}/boost/lib/libboost_atomic-mt.a
+      ${ROOT_LIB}/libboost_filesystem.a
+      ${ROOT_LIB}/libboost_system-mt.a
+      ${ROOT_LIB}/libboost_thread-mt.a
+      ${ROOT_LIB}/libboost_chrono.a
+      ${ROOT_LIB}/libboost_atomic-mt.a
       )
   else()
     set(libboost 
@@ -167,11 +175,12 @@ if (x86_64_LIB)
   target_include_directories(ccex
   PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Inc
-    ${ROOT_LIB}/boost/include
-    ${ROOT_LIB}/nlohmann-json/include
-    ${ROOT_LIB}/spdlog/include
-    ${ROOT_LIB}/curl/include
-    ${ROOT_LIB}/fmt/include # dependency of spdlog
+    ${ROOT_HEADER}
+    ${ROOT_HEADER}/boost/include
+    ${ROOT_HEADER}/nlohmann-json/include
+    ${ROOT_HEADER}/spdlog/include
+    ${ROOT_HEADER}/curl/include
+    ${ROOT_HEADER}/fmt/include # dependency of spdlog
     # ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/easy_profiler/easy_profiler_core/include
     )
 else()
@@ -187,16 +196,18 @@ else()
   )
 endif()
 
+message("libboost ${libboost}")
+
 link_directories(${CMAKE_BINARY_DIR}/third_party/)
 target_link_libraries(ccex
-PUBLIC
-  ${libboost}
-  ${libcurl}
-  ${libspdlog}
-  ${libcrypto}
-  ${libssl}
-  ${libfmt}
-  # easy_profiler
+  PUBLIC
+    ${libboost}
+    ${libcurl}
+    ${libspdlog}
+    ${libcrypto}
+    ${libssl}
+    ${libfmt}
+    # easy_profiler
 )
 endif()
 
@@ -218,11 +229,11 @@ PRIVATE
 
 # target_include_directories(${PROJECT_NAME}
 # PUBLIC
-#   ${CMAKE_CURRENT_SOURCE_DIR}/Inc
-#   ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/easy_profiler/easy_profiler_core/include
+  # ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+  # ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/easy_profiler/easy_profiler_core/include
 # )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC ccex)
+target_link_libraries(${PROJECT_NAME} PUBLIC ccex ${libboost})
 
 # if without easy_profiler, add below
 # target_compile_definitions(ccex PRIVATE BUILD_WITH_EASY_PROFILER)
