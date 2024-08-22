@@ -128,7 +128,7 @@ int main(void) {
   // test_thread_pattern();
   // test_atomic();
   // test_sync_and_async();
-  // test_thread_pool();
+  test_thread_pool();
 
   // test_copy_elision();
   // test_rvalue_simple();
