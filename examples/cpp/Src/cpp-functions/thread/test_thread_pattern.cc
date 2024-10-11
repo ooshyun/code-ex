@@ -154,9 +154,8 @@ void _test_thread_pattern_condition_var(void) {
 
 
 void test_thread_pattern(void) {
-    printf("  test_thread_pattern\n");
-    // _test_thread_pattern();
+  printf("  test_thread_pattern\n");
+  // _test_thread_pattern();
 
-    _test_thread_pattern_condition_var();
-
+  _test_thread_pattern_condition_var();
 }

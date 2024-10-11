@@ -102,4 +102,7 @@ void test_template_class(void);
 // test_filesystem.cc
 void test_filesystem(void);
 
+// test_multithread.cc
+void test_multithread(void);
+
 #endif  // PRACTICE_EXAMPLES_CPP_INC_TEST_CPP_FUNCTION_HPP_

@@ -31,6 +31,7 @@ file(GLOB SRC_FILES
     #  "${CMAKE_CURRENT_SOURCE_DIR}/Src/third-party/std/filesystem/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/boost/property_tree/*.cc"
      "${CMAKE_CURRENT_SOURCE_DIR}/Src/spdlog/*.cc"
+     "${CMAKE_CURRENT_SOURCE_DIR}/Src/linux/*.cc"
      )
 set(SOURCES "${SRC_FILES}")
 
@@ -214,6 +215,36 @@ endif()
 # add_dependencies(ccex libeasy_profiler)
 add_executable(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/Src/main.cc")
 
+set(LINK_LIBRARIES ${libboost})
+
+# Check for filesystem support
+include(CheckCXXSourceCompiles)
+check_cxx_source_compiles("
+    #include <filesystem>
+    int main() {
+        std::filesystem::path p;
+        return 0;
+    }"
+    HAS_STD_FILESYSTEM
+)
+
+if(HAS_STD_FILESYSTEM)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE HAS_STD_FILESYSTEM)
+else()
+    check_cxx_source_compiles("
+        #include <experimental/filesystem>
+        int main() {
+            std::experimental::filesystem::path p;
+            return 0;
+        }"
+        HAS_EXPERIMENTAL_FILESYSTEM
+    )
+    if(HAS_EXPERIMENTAL_FILESYSTEM)
+        target_compile_definitions(${PROJECT_NAME} PRIVATE HAS_EXPERIMENTAL_FILESYSTEM)
+    endif()
+endif()
+set(LINK_LIBRARIES ${LINK_LIBRARIES} stdc++fs)
+
 target_compile_options(${PROJECT_NAME}
 PRIVATE
   -Wall                # enable all warnings
@@ -233,7 +264,7 @@ PRIVATE
   # ${PROJECT_SOURCE_DIR}/examples/cpp/third_party/easy_profiler/easy_profiler_core/include
 # )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC ccex ${libboost})
+target_link_libraries(${PROJECT_NAME} PUBLIC ccex ${LINK_LIBRARIES})
 
 # if without easy_profiler, add below
 # target_compile_definitions(ccex PRIVATE BUILD_WITH_EASY_PROFILER)

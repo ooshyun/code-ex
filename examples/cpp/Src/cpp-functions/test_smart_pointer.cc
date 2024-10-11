@@ -27,9 +27,33 @@ class TestSmartPointer {
       return false;
     }
 
+    virtual void test_virtual() {
+      std::cout << "TestSmartPointer test_virtual" << std::endl;
+    }
+
  private:
     int _test;
 };
+
+class ParentTestSmartPointer: public TestSmartPointer {
+ public:
+    ParentTestSmartPointer(int test = 0) : TestSmartPointer(test) {
+        std::cout << "ParentTestSmartPointer constructor" << std::endl;
+    }
+
+    ~ParentTestSmartPointer() {
+        std::cout << "ParentTestSmartPointer destructor" << std::endl;
+    }
+
+    void test_virtual() override {
+      std::cout << "ParentTestSmartPointer test_virtual" << std::endl;
+    }
+
+    void test_parent() {
+      std::cout << "ParentTestSmartPointer test_parent" << std::endl;
+    }
+};
+
 
 class TestPassSmartPointer {
  public:
@@ -181,4 +205,17 @@ void test_smart_pointer(void) {
     // EASY_END_BLOCK;
 
     LOG_INFO("End test_smart_pointer");
+
+    LOG_INFO("Start to test pointer between parent and child.");
+    std::shared_ptr<ParentTestSmartPointer> parent_test_ptr =
+        std::make_shared<ParentTestSmartPointer>(5);
+
+    TestSmartPointer* test_ptr_parent = (TestSmartPointer*) parent_test_ptr.get();
+    test_ptr_parent->test_virtual();
+
+    ParentTestSmartPointer* parent_test_ptr_parent =
+        (ParentTestSmartPointer*) parent_test_ptr.get();
+    parent_test_ptr_parent->test_virtual();
+    parent_test_ptr_parent->test_parent();
+    LOG_INFO("End to test pointer between parent and child.");
 }

@@ -14,6 +14,9 @@ void test_switch_func(void);
 // test_condition.c
 void test_condition(void);
 
+// test_mem_alloc.c
+void test_mem_alloc(void);
+
 }
 
 

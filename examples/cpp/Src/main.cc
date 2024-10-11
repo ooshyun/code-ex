@@ -52,6 +52,9 @@
 #define TEST_LIBRARY
 #define TEST_DESIGN_PATTERN
 
+// Practice Linux 
+#define TEST_LINUX
+
 #ifdef TEST_ALGORITHM_PRACTICE
 #include "../Inc/algorithm.hpp"
 #include "../Inc/data_structure.hpp"
@@ -81,11 +84,16 @@
 #include "../Inc/spdlog_scratch.hpp"
 #endif
 
+#ifdef TEST_LINUX
+#include "../Inc/test_linux.hpp"
+#endif
+
 int main(void) {
   practice::log_init(0);
   // easy_profiler_init();
 
-  LOG_INFO("Start main function ");
+  // https://gist.github.com/ax3l/53db9fa8a4f4c21ecc5c4100c0d93c94
+  LOG_INFO("Start main function with c++ {0}", __cplusplus);
 #ifdef TEST_ALGORITHM_PRACTICE
   // 1. Practice Data Structures in HackerRank Youtube
   // testBalancedParenthesesinExpression();
@@ -128,7 +136,7 @@ int main(void) {
   // test_thread_pattern();
   // test_atomic();
   // test_sync_and_async();
-  test_thread_pool();
+  // test_thread_pool();
 
   // test_copy_elision();
   // test_rvalue_simple();
@@ -188,7 +196,7 @@ int main(void) {
   // test_exec();
 
   /* test_string.cc */
-  test_string();
+  // test_string();
 
   /* test_var_type.cc */
   // test_const();
@@ -218,6 +226,9 @@ int main(void) {
 
   /* test_filesystem */
   // test_filesystem();
+
+  /* test_multithread */
+  // test_multithread();
 #endif
 
 #ifdef TEST_C_FUNCTION
@@ -233,6 +244,9 @@ int main(void) {
 
   /* test_condition */
   // test_condition();
+
+  /* test_memeory_allocation*/
+  test_mem_alloc();
 #endif
 
 #ifdef TEST_DESIGN_PATTERN
@@ -274,6 +288,10 @@ int main(void) {
 
 #ifdef TEST_SPDLOG
     // test_spdlog_scratch();
+#endif
+
+#ifdef TEST_LINUX
+    test_remain_storage();
 #endif
 
   // easy_profiler_finish();
